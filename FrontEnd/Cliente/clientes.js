@@ -139,7 +139,6 @@ async function fetchDataFromDB(lista) {
 
 
 function cargarBody(data) {
-    console.log(data)
     for(let dataObject of data) {
         const rowElement = document.createElement("tr");
         let dataObjectArray = Object.entries(dataObject);
@@ -272,7 +271,7 @@ guardarEdicionEmpresa.addEventListener("click", () => {
     refreshTable("./headers.json", lista)
 })
 
-async function search() {
+function search() {
     refreshTable("./headers.json", `http://localhost:8080/cliente/obtener_por_nombre?nombre=${listaBusqueda.value}`)
 }
 
@@ -283,5 +282,5 @@ buscarBtn.addEventListener("click", () => {
         
     }
     search();
-    console.log(lista)
+    alert(lista.value)
 })

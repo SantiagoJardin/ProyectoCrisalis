@@ -6,6 +6,7 @@ import com.santiagojardin.crisalis.repositorios.ClienteRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,8 +34,13 @@ public class ClienteServicio {
                 ).toDTO();
     }
 
-    public List<Cliente> loadClienteByName(String nombre) {
-        return this.clienteRepositorio.findByNombreContainsIgnoreCase(nombre);
+    public List<ClienteDTO> loadClienteByName(String nombre) {
+        List<Cliente> listaClientes =  this.clienteRepositorio.findByNombreContainsIgnoreCase(nombre);
+        List<ClienteDTO> listaDTO = new ArrayList<>();
+        for (int i = 0; i < listaClientes.size(); i++) {
+            listaDTO.add(listaClientes.get(i).toDTO());
+        }
+        return listaDTO;
     }
 
     public void actualizarCliente (boolean esEmpresa, String nombre, String identificacion,

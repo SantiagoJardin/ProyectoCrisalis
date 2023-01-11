@@ -31,7 +31,7 @@ public class ClienteControlador {
     }
 
     @GetMapping(value = "obtener_por_nombre", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Cliente> cargarClientePorNombre(@RequestParam String nombre) {
+    public List<ClienteDTO> cargarClientePorNombre(@RequestParam String nombre) {
         return this.clienteServicio.loadClienteByName(nombre);
     }
 
