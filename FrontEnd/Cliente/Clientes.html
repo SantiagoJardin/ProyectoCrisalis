@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilohome.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+    <title>Clientes</title>
+
+</head>
+<body>
+    <header>
+        <ul class="menu">
+            <li><a href="/home/santiago/Documentos/FrontEnd/Home/Home.html">Home</a></li>
+            <li><a href="/home/santiago/Documentos/FrontEnd/Productos/Productos.html">Productos</a></li>
+            <li><a href="/home/santiago/Documentos/FrontEnd/Servicios/Servicios.html">Servicios</a></li>
+            <li><a href="/home/santiago/Documentos/FrontEnd/Cliente/Clientes.html">Clientes</a></li>
+            <li><a href="/home/santiago/Documentos/FrontEnd/Pedidos/Pedidos.html">Pedidos</a></li>
+            <li><a href="/home/santiago/Documentos/FrontEnd/Impuestos/Impuestos.html">Impuestos</a></li>
+        </ul>
+    </header>
+    <div class="centerpanel-container" id="centerpanel-container">
+        <div class="centerpanel-persona" id="centerpanel-persona">
+            <h3 class="titulo-popup">Editar persona</h3>
+            <input id="nombre-persona" class="input-atributo" placeholder="Nombre" type="text" required>
+            <input id="apellido-persona" class="input-atributo" placeholder="Apellido" type="text" required>
+            <input id="identificacion-persona" class="input-atributo" placeholder="DNI (no modificable)" type="text" required>
+            <input id="direccion-persona" class="input-atributo" placeholder="Direccion" type="text" required>
+            <input id="email-persona" class="input-atributo" placeholder="Mail" type="text" required>
+            <div class="botones-popup">
+                <button class="boton-popup" id="guardar-edicion-persona">Guardar</button>
+                <button class="boton-popup" id="cerrar-edicion-persona">Cerrar</button>
+            </div> 
+        </div>
+        <div class="centerpanel-empresas" id="centerpanel-empresas">
+            <h3 class="titulo-popup">Editar empresa</h3>
+            <input id="cuit-empresa" type="text" placeholder="CUIT" class="input-atributo" required>
+            <input id="razon-social-empresa" type="text" placeholder="Razón Social" class="input-atributo" required>
+            <input id="fecha-empresa" type="date" class="input-atributo">
+            <input id="nombre-empresa" type="text" placeholder="Nombre" class="input-atributo" required>
+            <input id="apellido-empresa" type="text" placeholder="Apellido" class="input-atributo" required>
+            <input id="direccion-empresa" type="text" placeholder="Direccion" class="input-atributo" required>
+            <input id="email-empresa" type="text" placeholder="Email" class="input-atributo" required>
+            <div class="botones-popup">
+                <button class="boton-popup" id="guardar-edicion-empresa">Guardar</button>
+                <button class="boton-popup" id="cerrar-edicion-empresa">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="barra-bs">
+        <h2>Clientes</h2>
+        <form class="d-flex">
+            <input id="nombre-busqueda" class="form-control me-2" type="search" placeholder="Buscar por nombre" aria-label="Search">
+            <button id="buscar-btn" class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+        <button id="btnCrear" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalArticulo"><img class="img-btn" src="/home/santiago/Documentos/FrontEnd/img/add.png" alt="agregar"></button>
+    </div>
+
+    <table class="producto-tabla" id="table">
+        <thead id="thead"></thead>
+        <tbody id="tbody"></tbody>
+    </table>
+
+    </div>
+
+    <th></th>
+
+    <div id="modalArticulo" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <button id="empresaDatos" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalEmpresa"  >Empresa</button>
+                    <button id="personaDatos" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalPersona"  >Persona fisica</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modalEmpresa" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear empresa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="col-form-label">Nombre:</label>
+                            <input id="nombreE" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="col-form-label">Apellido:</label>
+                            <input id="apellidoE" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="identificacion" class="col-form-label">Dni/Cuit:</label>
+                            <input id="identificacionE" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="col-form-label">Direccion:</label>
+                            <input id="direccionE" type="text" class="form-control" autofocus required> 
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input id="emailE" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="razon" class="col-form-label">Razon social</label>
+                            <input id="razonE" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha" class="col-form-label">Fecha de Inicio:</label>
+                            <input id="fecha" type="date" class="form-control">
+                        </div>                      
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button id="guardar" type="submit" class="btn btn-primary">Guardar </button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="modalPersona" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear persona</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="col-form-label">Nombre:</label>
+                            <input id="nombreP" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="col-form-label">Apellido:</label>
+                            <input id="apellidoP" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="identificacion" class="col-form-label">Dni/Cuit:</label>
+                            <input id="identificacionP" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="col-form-label">Direccion:</label>
+                            <input id="direccionP" type="text" class="form-control" autofocus required> 
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input id="emailP" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button id="guardarP" type="submit" class="btn btn-primary">Guardar </button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+    
+     <!--    
+    <button id="eliminar" class="btn"><img class="img-btn" src="/home/santiago/Documentos/FrontEnd/img/basura.png" alt="borrar"></button>
+    <button id="editar" class="btn"><img class="img-btn" src="/home/santiago/Documentos/FrontEnd/img/boton-editar.png" alt="editar"></button> 
+     -->   
+        
+        
+    <script src="clientes.js"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+
+
+</body>
+</html>

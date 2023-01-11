@@ -1,0 +1,10 @@
+{
+    "headers": [
+        "Id",
+        "Producto",
+        "Precio",
+        "Fecha",
+        "Cantidad",
+        "Acciones"
+    ]
+}

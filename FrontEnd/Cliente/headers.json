@@ -1,0 +1,13 @@
+{
+    "headers": [
+        "Tipo",
+        "Nombre",
+        "Identificacion",
+        "Apellido",
+        "Direccion",
+        "Email",
+        "Razon social",
+        "Fecha", 
+        "Acciones"
+    ]
+}
