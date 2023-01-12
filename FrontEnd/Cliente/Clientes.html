@@ -31,10 +31,15 @@
     <div class="centerpanel-container" id="centerpanel-container">
         <div class="centerpanel-persona" id="centerpanel-persona">
             <h3 class="titulo-popup">Editar persona</h3>
+            <h5>Nombre: </h5>
             <input id="nombre-persona" class="input-atributo" placeholder="Nombre" type="text" required>
+            <h5>Apellido: </h5>
             <input id="apellido-persona" class="input-atributo" placeholder="Apellido" type="text" required>
+            <h5>Dni: </h5>
             <input id="identificacion-persona" class="input-atributo" placeholder="DNI (no modificable)" type="text" required>
+            <h5>Direccion: </h5>
             <input id="direccion-persona" class="input-atributo" placeholder="Direccion" type="text" required>
+            <h5>Email: </h5>
             <input id="email-persona" class="input-atributo" placeholder="Mail" type="text" required>
             <div class="botones-popup">
                 <button class="boton-popup" id="guardar-edicion-persona">Guardar</button>
@@ -60,8 +65,8 @@
     <div class="barra-bs">
         <h2>Clientes</h2>
         <form class="d-flex">
-            <input id="nombre-busqueda" class="form-control me-2" type="search" placeholder="Buscar por nombre" aria-label="Search">
-            <button id="buscar-btn" class="btn btn-outline-success" type="submit">Buscar</button>
+            <input id="nombre-busqueda" class="form-control me-2" type="search" onkeyup="search()" placeholder="Buscar por nombre" aria-label="Search">
+            <button id="buscar-btn" class="btn btn-outline-success" >Buscar</button>
         </form>
         <button id="btnCrear" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalArticulo"><img class="img-btn" src="/home/santiago/Documentos/ProyectoCrisalis/FrontEnd/img/add.png" alt="agregar"></button>
     </div>

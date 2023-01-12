@@ -229,7 +229,9 @@ async function refreshTable(urlHeaders, urlBody) {
     // Body
     tableBody.innerHTML = "";
     fetchDataFromDB(urlBody).then(data => {
+        console.log(data)
         cargarBody(data);
+
     });
 }
 
@@ -272,18 +274,10 @@ guardarEdicionEmpresa.addEventListener("click", () => {
 })
 
 function search() { 
+    event.preventDefault();
     let listaBusqueda =`http://localhost:8080/cliente/obtener_por_nombre?nombre=${nombreBuscado.value}`
     refreshTable("./headers.json", listaBusqueda)
     
     
 }
 
-buscarBtn.addEventListener("click", () => {
-    if(nombreBuscado.value == "") {
-        refreshTable("./headers.json", lista);
-        return;
-        
-    }
-    search();
-    
-})

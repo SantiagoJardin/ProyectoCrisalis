@@ -1,11 +1,10 @@
 package com.santiagojardin.crisalis.modelo;
 
 import com.santiagojardin.crisalis.modelo.DTO.ServicioDTO;
-import com.santiagojardin.crisalis.modelo.DTO.ServicioDTO;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+
 
 @Getter
 @Setter
@@ -43,7 +42,7 @@ public class Servicio {
                 .id(this.id)
                 .servicio(this.servicio)
                 .precio(this.precio)
-                .fecha(this.cargo)
+                .cargo(this.cargo)
                 .build();
     }
 }
