@@ -51,7 +51,7 @@ const guardar = 'http://localhost:8080/cliente/guardar_cliente'
 const lista = 'http://localhost:8080/cliente/lista'
  
 
-const listaBusqueda = document.querySelector("#nombre-busqueda")
+const nombreBuscado = document.querySelector("#nombre-busqueda")
 const buscarBtn = document.querySelector("#buscar-btn")
 
 
@@ -271,16 +271,19 @@ guardarEdicionEmpresa.addEventListener("click", () => {
     refreshTable("./headers.json", lista)
 })
 
-function search() {
-    refreshTable("./headers.json", `http://localhost:8080/cliente/obtener_por_nombre?nombre=${listaBusqueda.value}`)
+function search() { 
+    let listaBusqueda =`http://localhost:8080/cliente/obtener_por_nombre?nombre=${nombreBuscado.value}`
+    refreshTable("./headers.json", listaBusqueda)
+    
+    
 }
 
 buscarBtn.addEventListener("click", () => {
-    if(listaBusqueda.value == "") {
+    if(nombreBuscado.value == "") {
         refreshTable("./headers.json", lista);
         return;
         
     }
     search();
-    alert(lista.value)
+    
 })

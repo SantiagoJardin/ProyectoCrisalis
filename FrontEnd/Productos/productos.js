@@ -12,6 +12,7 @@ const contenedor = document.querySelector("#data")
 const btnEditar = document.querySelector("#editar")
 const btnEliminar = document.querySelector("#eliminar")
 
+const idProdructo = document.querySelector("#id-producto")
 const nombreProducto = document.querySelector("#nombre-producto");
 const precioProducto = document.querySelector("#precio-producto");
 const fechaProducto = document.querySelector("#fecha-producto");
@@ -73,6 +74,7 @@ function cargarBody(data) {
         editar.addEventListener("click", () => {
             centerPanelContainer.style.display = "flex";
             centerPanelProducto.style.display = "flex";
+            idProdructo.value = dataObjectArray[0][1];
             nombreProducto.value = dataObjectArray[1][1];
             precioProducto.value = dataObjectArray[2][1];
             fechaProducto.value = dataObjectArray[3][1];
@@ -83,7 +85,7 @@ function cargarBody(data) {
         borrar.addEventListener("click", () => {
             let producto = dataObjectArray[0][1];
             console.log
-            let linkBorrar = `http://localhost:8080/producto/borrar?producto=${producto}`
+            let linkBorrar = `http://localhost:8080/producto/borrar?id=${producto}`
             let response = fetch(linkBorrar, {
                 method: "POST"
                })
@@ -137,7 +139,7 @@ cerrarEdicionProducto.addEventListener("click", () => {
 })
 
 guardarEdicionProducto.addEventListener("click", () => {
-    let link = `http://localhost:8080/producto/actualizar?producto=${nombreProducto.value}&precio=${precioProducto.value}&fecha=${fechaProducto.value}&stock=${cantidadProducto.value}`
+    let link = `http://localhost:8080/producto/actualizar?producto=${nombreProducto.value}&precio=${precioProducto.value}&fecha=${fechaProducto.value}&stock=${cantidadProducto.value}&id=${idProdructo.value}`
     fetch(link, {
      method: "POST"
     })
