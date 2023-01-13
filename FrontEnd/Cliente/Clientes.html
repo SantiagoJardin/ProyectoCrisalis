@@ -64,14 +64,16 @@
     
     <div class="barra-bs">
         <h2>Clientes</h2>
-        <form>
+        <div class="bs">
             
-            
-        </form>
-        <button id="btnCrear" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalArticulo"><img class="img-btn" src="../img/add.png" alt="agregar"></button>
+            <input id="nombre-busqueda" class="form-control me-2" type="search" onkeyup="search()" placeholder="Buscar por nombre" aria-label="Search" style="max-width: 300px; ">
+            <button id="btnCrear" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalArticulo"><img class="img-btn" src="../img/add.png" alt="agregar"></button>
+        </div>
+        
+        
     </div>
-
-    <input id="nombre-busqueda" class="form-control me-2" type="search" onkeyup="search()" placeholder="Buscar por nombre" aria-label="Search" style="max-width: 300px; margin-left: 150px; ">
+    
+    
 
     <table class="producto-tabla" id="table">
         <thead id="thead"></thead>

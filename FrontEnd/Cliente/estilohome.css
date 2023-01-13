@@ -16,11 +16,16 @@ body{
 }
 
 .barra-bs {
-    display: flex;
+    display: block;
     color: #252525;
     max-width: 1300px;
     margin: 15px auto;
     width: 100%;
+    justify-content: space-between;
+}
+
+.bs {
+    display: flex;
     justify-content: space-between;
 }
 

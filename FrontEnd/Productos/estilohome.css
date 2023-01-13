@@ -23,6 +23,11 @@ body{
     justify-content: space-between;
 }
 
+.bs {
+    display: flex;
+    justify-content: space-between;
+}
+
 .barra-bs button{
     margin-left: 74%;
     

@@ -63,7 +63,7 @@ const btnEliminar = document.querySelector("#eliminar")
 //registro de clientes
 function registroClienteEmpresa() { 
     if (nombreE.value != "" && apellidoE.value != "" && identificacionE.value != "" && emailE.value != "" && direccionE.value != "" && razonSocial.value != "") {
-        if (confirm("Confirmar registro?") == false) {
+        if (confirm("¿Confirmar registro?") == false) {
             return
         }
             const data = {
@@ -92,7 +92,7 @@ function registroClienteEmpresa() {
 
 function registroClientePersona() { 
     if (nombreP.value != "" && apellidoP.value != "" && identificacionP.value != "" && emailP.value != "" && direccionP.value != "") {
-        if (confirm("Confirmar registro?") == false) {
+        if (confirm("¿Confirmar registro?") == false) {
             return
         }
             const data = {
@@ -173,6 +173,9 @@ function cargarBody(data) {
         })
 
         borrar.addEventListener("click", () => {
+            if (confirm("¿Desea eliminar?") == false) {
+                return
+            }
             let dni = dataObjectArray[2][1];
             let linkBorrar = `http://localhost:8080/cliente/borrar?identificacion=${dni}`
             let response = fetch(linkBorrar, {

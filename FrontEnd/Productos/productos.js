@@ -83,6 +83,9 @@ function cargarBody(data) {
         })
 
         borrar.addEventListener("click", () => {
+            if (confirm("¿Desea eliminar?") == false) {
+                return
+            }
             let producto = dataObjectArray[0][1];
             console.log
             let linkBorrar = `http://localhost:8080/producto/borrar?id=${producto}`
