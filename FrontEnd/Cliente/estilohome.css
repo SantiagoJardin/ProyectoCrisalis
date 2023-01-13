@@ -16,6 +16,7 @@ body{
 }
 
 .barra-bs {
+    display: flex;
     color: #252525;
     max-width: 1300px;
     margin: 15px auto;

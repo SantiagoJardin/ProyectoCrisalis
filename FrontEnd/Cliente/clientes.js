@@ -183,9 +183,9 @@ function cargarBody(data) {
         })
 
         let td = document.createElement("td");
-        editar.innerHTML = '<img src="/home/santiago/Documentos/ProyectoCrisalis/FrontEnd/img/boton-editar.png"/>'
+        editar.innerHTML = '<img src="../img/boton-editar.png"/>'
         editar.className = "btn";
-        borrar.innerHTML = '<img src="/home/santiago/Documentos/ProyectoCrisalis/FrontEnd/img/basura.png"/>'
+        borrar.innerHTML = '<img src="../img/basura.png"/>'
         borrar.className = "btn";
         td.append(editar)
         td.append(borrar)
