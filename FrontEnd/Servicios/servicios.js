@@ -1,9 +1,8 @@
 const tableBody = document.querySelector("#tbody")
 const tableHead = document.querySelector("#thead")
-const nombre = document.querySelector("#servico")
+const nombre = document.querySelector("#servicio")
 const precio = document.querySelector("#precio")
-const soporte = document.querySelector("#soporte")
-
+const cargo = document.querySelector("#soporte")
 const guardarBtn = document.querySelector("#guardar")
 const guardar = 'http://localhost:8080/servicio/guardar_servicio'
 const lista = 'http://localhost:8080/servicio/lista'
@@ -12,23 +11,24 @@ const contenedor = document.querySelector("#data")
 const btnEditar = document.querySelector("#editar")
 const btnEliminar = document.querySelector("#eliminar")
 
+const idServicio = document.querySelector("#id-servicio")
 const nombreServicio = document.querySelector("#nombre-servicio");
 const precioServicio = document.querySelector("#precio-servicio");
-const cargoSoporte= document.querySelector("#cargo-soporte");
+const cargoSoporte = document.querySelector("#cargo-soporte");
 const centerPanelContainer = document.querySelector("#centerpanel-container");
 const centerPanelServicio = document.querySelector("#centerpanel-servicio");
 const guardarEdicionServicio = document.querySelector("#guardar-edicion-servicio");
-const cerrarEdicionServicio= document.querySelector("#cerrar-edicion-servicio");
+const cerrarEdicionServicio = document.querySelector("#cerrar-edicion-servicio");
 
 
 
 
-//registro de servicios
+//registro de Servicios
 function registroServicio() { 
     const data = {
         servicio : nombre.value,
         precio : precio.value,
-        soporte : soporte.value,
+        cargo : cargo.value,
     };
     const response = fetch(guardar, {
         method : 'POST',
@@ -71,16 +71,17 @@ function cargarBody(data) {
         editar.addEventListener("click", () => {
             centerPanelContainer.style.display = "flex";
             centerPanelServicio.style.display = "flex";
+            idServicio.value = dataObjectArray[0][1];
             nombreServicio.value = dataObjectArray[1][1];
-            precioServicio.value = dataObjectArray[2][1]
+            precioServicio.value = dataObjectArray[2][1];
             cargoSoporte.value = dataObjectArray[3][1];
-
+            
         })
 
         borrar.addEventListener("click", () => {
             let servicio = dataObjectArray[0][1];
             console.log
-            let linkBorrar = `http://localhost:8080/servicio/borrar?servicio=${servicio}`
+            let linkBorrar = `http://localhost:8080/servicio/borrar?id=${servicio}`
             let response = fetch(linkBorrar, {
                 method: "POST"
                })
@@ -134,7 +135,7 @@ cerrarEdicionServicio.addEventListener("click", () => {
 })
 
 guardarEdicionServicio.addEventListener("click", () => {
-    let link = `http://localhost:8080/servicio/actualizar?servicio=${nombreServicio.value}&precio=${precioServicio.value}&soporte=${cargoSoporte.value}`
+    let link = `http://localhost:8080/servicio/actualizar?servicio=${nombreServicio.value}&precio=${precioServicio.value}&cargo=${cargoSoporte.value}&id=${idServicio.value}`
     fetch(link, {
      method: "POST"
     })

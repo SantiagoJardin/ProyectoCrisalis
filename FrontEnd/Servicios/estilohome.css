@@ -95,7 +95,7 @@ body{
     background: #cccccc;
 }
 
-.centerpanel-producto {
+.centerpanel-servicio {
     display: none;
     flex-direction: column;
     width: 400px;
