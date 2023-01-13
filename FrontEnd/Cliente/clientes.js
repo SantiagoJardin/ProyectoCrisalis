@@ -281,6 +281,5 @@ function search() {
     let listaBusqueda =`http://localhost:8080/cliente/obtener_por_nombre?nombre=${nombreBuscado.value}`
     refreshTable("./headers.json", listaBusqueda)
     
-    
 }
 

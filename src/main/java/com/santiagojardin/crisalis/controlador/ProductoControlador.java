@@ -26,7 +26,7 @@ public class ProductoControlador {
     }
 
     @GetMapping(value = "obtener_por_nombre", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Producto cargarProductoPorNombre(@RequestParam String producto) {
+    public List<Producto> cargarProductoPorNombre(@RequestParam String producto) {
         return this.productoServicio.loadProductoByName(producto);
     }
 

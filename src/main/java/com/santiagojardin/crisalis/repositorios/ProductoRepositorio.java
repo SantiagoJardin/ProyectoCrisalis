@@ -10,12 +10,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ProductoRepositorio extends JpaRepository <Producto, Integer>{
-    @Query("select p from Producto p where p.producto = ?1")
-    Producto findByProducto(String producto);
+    @Query("select p from Producto p where upper(p.producto) like upper(concat('%', ?1, '%'))")
+    List<Producto> findByProductoContainsIgnoreCase(String producto);
+
+
     @Transactional
     @Modifying
     @Query("delete from Producto p where p.id = ?1")

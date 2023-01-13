@@ -26,8 +26,8 @@ public class ServicioServicio {
         this.servicioRepositorio.deleteById(id);
     }
 
-    public Servicio loadServicioByName(String servicio) {
-        return this.servicioRepositorio.findByServicio(servicio);
+    public List<Servicio> loadServicioByName(String servicio) {
+        return this.servicioRepositorio.findByServicioContainsIgnoreCase(servicio);
 
     }
 

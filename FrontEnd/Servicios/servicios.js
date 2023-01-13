@@ -20,6 +20,8 @@ const centerPanelServicio = document.querySelector("#centerpanel-servicio");
 const guardarEdicionServicio = document.querySelector("#guardar-edicion-servicio");
 const cerrarEdicionServicio = document.querySelector("#cerrar-edicion-servicio");
 
+const nombreBuscado = document.querySelector("#nombre-busqueda")
+
 
 
 
@@ -54,7 +56,6 @@ async function fetchDataFromDB(lista) {
 }
 
 function cargarBody(data) {
-    console.log(data)
     for(let dataObject of data) {
         const rowElement = document.createElement("tr");
         let dataObjectArray = Object.entries(dataObject);
@@ -147,3 +148,10 @@ guardarEdicionServicio.addEventListener("click", () => {
      refreshTable("./headers.json", lista)
  
  })
+
+ function search() { 
+    event.preventDefault();
+    let listaBusqueda =`http://localhost:8080/producto/obtener_por_nombre?servicio=${nombreBuscado.value}`
+    refreshTable("./headers.json", listaBusqueda)
+    
+}

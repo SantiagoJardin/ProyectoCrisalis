@@ -26,7 +26,7 @@ public class ServicioControlador {
     }
 
     @GetMapping(value = "obtener_por_nombre", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Servicio cargarServicioPorNombre(@RequestParam String servicio) {
+    public List<Servicio> cargarServicioPorNombre(@RequestParam String servicio) {
         return this.servicioServicio.loadServicioByName(servicio);
     }
 

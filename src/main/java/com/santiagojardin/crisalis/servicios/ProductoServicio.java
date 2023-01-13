@@ -26,8 +26,8 @@ public class ProductoServicio {
         this.productoRepositorio.deleteById(id);
     }
 
-    public Producto loadProductoByName(String producto) {
-        return this.productoRepositorio.findByProducto(producto);
+    public List<Producto> loadProductoByName(String producto) {
+        return this.productoRepositorio.findByProductoContainsIgnoreCase(producto);
 
     }
 
