@@ -1,5 +1,6 @@
 package com.santiagojardin.crisalis.modelo;
 
+import com.santiagojardin.crisalis.modelo.DTO.ImpuestoDTO;
 import com.santiagojardin.crisalis.modelo.DTO.ServicioDTO;
 import lombok.*;
 

@@ -151,7 +151,7 @@ guardarEdicionServicio.addEventListener("click", () => {
 
  function search() { 
     event.preventDefault();
-    let listaBusqueda =`http://localhost:8080/producto/obtener_por_nombre?servicio=${nombreBuscado.value}`
+    let listaBusqueda =`http://localhost:8080/servicio/obtener_por_nombre?servicio=${nombreBuscado.value}`
     refreshTable("./headers.json", listaBusqueda)
     
 }
