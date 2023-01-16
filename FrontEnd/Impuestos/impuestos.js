@@ -1,7 +1,7 @@
 const tableBody = document.querySelector("#tbody")
 const tableHead = document.querySelector("#thead")
-const nombre = document.querySelector("#impuesto")
-const precio = document.querySelector("#porcentaje")
+const impuesto = document.querySelector("#nombre-impuesto")
+const porcentaje = document.querySelector("#porcentaje-impuesto")
 const guardarBtn = document.querySelector("#guardar")
 const guardar = 'http://localhost:8080/impuesto/guardar_impuesto'
 const lista = 'http://localhost:8080/impuesto/lista'
@@ -10,8 +10,8 @@ const contenedor = document.querySelector("#data")
 const btnEditar = document.querySelector("#editar")
 const btnEliminar = document.querySelector("#eliminar")
 
-const nombreImpuesto = document.querySelector("#nombre-impuesto");
-const porcentajeImpuesto = document.querySelector("#porcentaje-impuesto");
+const nombreImpuesto = document.querySelector("#impuesto");
+const porcentajeImpuesto = document.querySelector("#Porcentaje");
 
 const centerPanelContainer = document.querySelector("#centerpanel-container");
 const centerPanelImpuesto = document.querySelector("#centerpanel-impuesto");
@@ -24,8 +24,8 @@ const cerrarEdicionImpuesto = document.querySelector("#cerrar-edicion-impuesto")
 //registro de productos
 function registroImpuesto() { 
     const data = {
-        impuesto : impuesto.value,
-        porcentaje : porcentaje.value,
+        impuesto : nombreImpuesto.value,
+        porcentaje : porcentajeImpuesto.value,
     };
     const response = fetch(guardar, {
         method : 'POST',
@@ -67,7 +67,7 @@ function cargarBody(data) {
 
         editar.addEventListener("click", () => {
             centerPanelContainer.style.display = "flex";
-            centerPanelProducto.style.display = "flex";
+            centerPanelImpuesto.style.display = "flex";
             nombreImpuesto.value = dataObjectArray[1][1];
             porcentajeImpuesto.value = dataObjectArray[2][1];
            
@@ -75,9 +75,9 @@ function cargarBody(data) {
         })
 
         borrar.addEventListener("click", () => {
-            let producto = dataObjectArray[0][1];
+            let impuesto = dataObjectArray[0][1];
             console.log
-            let linkBorrar = `http://localhost:8080/producto/borrar?producto=${producto}`
+            let linkBorrar = `http://localhost:8080/impuesto/borrar?id=${impuesto}`
             let response = fetch(linkBorrar, {
                 method: "POST"
                })
