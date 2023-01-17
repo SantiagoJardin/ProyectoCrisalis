@@ -10,8 +10,15 @@ const contenedor = document.querySelector("#data")
 const btnEditar = document.querySelector("#editar")
 const btnEliminar = document.querySelector("#eliminar")
 
+
+//add
 const nombreImpuesto = document.querySelector("#impuesto");
 const porcentajeImpuesto = document.querySelector("#Porcentaje");
+
+//edit
+const idImpuesto = ""
+
+
 
 const centerPanelContainer = document.querySelector("#centerpanel-container");
 const centerPanelImpuesto = document.querySelector("#centerpanel-impuesto");
@@ -68,8 +75,9 @@ function cargarBody(data) {
         editar.addEventListener("click", () => {
             centerPanelContainer.style.display = "flex";
             centerPanelImpuesto.style.display = "flex";
-            nombreImpuesto.value = dataObjectArray[1][1];
-            porcentajeImpuesto.value = dataObjectArray[2][1];
+            idImpuesto.value = dataObjectArray[0][1];
+            impuesto.value = dataObjectArray[1][1];
+            porcentaje.value = dataObjectArray[2][1];
            
 
         })
@@ -131,7 +139,8 @@ cerrarEdicionImpuesto.addEventListener("click", () => {
 })
 
 guardarEdicionImpuesto.addEventListener("click", () => {
-    let link = `http://localhost:8080/impuesto/actualizar?impuesto=${nombreImpuesto.value}&porcentaje=${porcentajeImpuesto.value}`
+    
+    let link = `http://localhost:8080/impuesto/actualizar?impuesto=${impuesto.value}&porcentaje=${porcentaje.value}&id=${idImpuesto.value}`
     fetch(link, {
      method: "POST"
     })
