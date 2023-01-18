@@ -16,7 +16,7 @@ const nombreImpuesto = document.querySelector("#impuesto");
 const porcentajeImpuesto = document.querySelector("#Porcentaje");
 
 //edit
-const idImpuesto = ""
+let idImpuesto = ""
 
 
 
@@ -75,7 +75,7 @@ function cargarBody(data) {
         editar.addEventListener("click", () => {
             centerPanelContainer.style.display = "flex";
             centerPanelImpuesto.style.display = "flex";
-            idImpuesto.value = dataObjectArray[0][1];
+            idImpuesto = dataObjectArray[0][1];
             impuesto.value = dataObjectArray[1][1];
             porcentaje.value = dataObjectArray[2][1];
            
@@ -140,7 +140,7 @@ cerrarEdicionImpuesto.addEventListener("click", () => {
 
 guardarEdicionImpuesto.addEventListener("click", () => {
     
-    let link = `http://localhost:8080/impuesto/actualizar?impuesto=${impuesto.value}&porcentaje=${porcentaje.value}&id=${idImpuesto.value}`
+    let link = `http://localhost:8080/impuesto/actualizar?impuesto=${impuesto.value}&porcentaje=${porcentaje.value}&id=${idImpuesto}`
     fetch(link, {
      method: "POST"
     })
