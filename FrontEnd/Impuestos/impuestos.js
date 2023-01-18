@@ -15,11 +15,14 @@ const btnEliminar = document.querySelector("#eliminar")
 const nombreImpuesto = document.querySelector("#impuesto");
 const porcentajeImpuesto = document.querySelector("#Porcentaje");
 
+
 //edit
 let idImpuesto = ""
 
 
 
+
+const nombreBuscado = document.querySelector("#nombre-busqueda")
 const centerPanelContainer = document.querySelector("#centerpanel-container");
 const centerPanelImpuesto = document.querySelector("#centerpanel-impuesto");
 const guardarEdicionImpuesto = document.querySelector("#guardar-edicion-impuesto");
@@ -149,3 +152,10 @@ guardarEdicionImpuesto.addEventListener("click", () => {
      refreshTable("./headers.json", lista)
  
  })
+
+ function search() { 
+    event.preventDefault();
+    let listaBusqueda =`http://localhost:8080/impuesto/obtener_por_nombre?impuesto=${nombreBuscado.value}`
+    refreshTable("./headers.json", listaBusqueda)
+    
+}

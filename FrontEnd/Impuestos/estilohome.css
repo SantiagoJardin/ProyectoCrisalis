@@ -43,6 +43,11 @@ body{
     
 }
 
+.bs {
+    display: flex;
+    justify-content: space-between;
+}
+
 
 .menu li a{
     text-decoration: none;
