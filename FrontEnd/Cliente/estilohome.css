@@ -102,6 +102,11 @@ body{
     background: #cccccc;
 }
 
+@keyframes fade-in {
+    from {opacity: 0%;}
+    to {opacity: 100%;}
+}
+
 .nuevo-usuario {
     text-align: left;
     max-width: 1300px;
@@ -147,6 +152,8 @@ div.nuevo-usuario{
     background-color: azure;
     padding: 20px;
     border-radius: 10px;
+    animation-name: fade-in;
+    animation-duration: 0.4s;
 }
 
 .centerpanel-container {
@@ -171,6 +178,8 @@ div.nuevo-usuario{
     background-color: azure;
     padding: 20px;
     border-radius: 10px;
+    animation-name: fade-in;
+    animation-duration: 0.4s;
 }
 
 .titulo-popup {
