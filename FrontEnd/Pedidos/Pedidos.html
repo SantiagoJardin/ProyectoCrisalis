@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilohome.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+    <title>Pedidos</title>
+   
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <ul class="menu">
+            <li><a href="../Home/Home.html">Home</a></li>
+            <li><a href="../Productos/Productos.html">Productos</a></li>
+            <li><a href="../Servicios/Servicios.html">Servicios</a></li>
+            <li><a href="../Cliente/Clientes.html">Clientes</a></li>
+            <li><a href="../Pedidos/Pedidos.html">Pedidos</a></li>
+            <li><a href="../Impuestos/Impuestos.html">Impuestos</a></li>
+        </ul>
+    </header>
+
+    <!-- Barra de busqueda y boton de crear -->
+    <div class="barra-bs">
+        <h2>Pedidos</h2>
+        <div class="bs">
+            <input id="nombre-busqueda" class="form-control me-2" type="search" onkeyup="search()" placeholder="Buscar por nombre de cliente" aria-label="Search" style="max-width: 300px; ">
+            <button id="btnCrear" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalArticulo"><img class="img-btn" src="../img/add.png" alt="agregar"></button>
+        </div>  
+    </div>
+    
+    <!-- Tabla -->
+    <table class="producto-tabla" id="table">
+        <thead id="thead"></thead>
+        <tbody id="tbody"></tbody>
+    </table>
+    <th></th>
+
+    <!-- Modal pedido -->
+    <div id="modalArticulo" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <button id="cliente-existente" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#"  >Cliente existente</button>
+                    <button id="nuevo-cliente" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalArticulo2"  >Cliente nuevo</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cliente -->
+    <div id="modalArticulo2" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Crear cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <button id="empresaDatos" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalEmpresa"  >Empresa</button>
+                    <button id="personaDatos" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalPersona"  >Persona física</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Empresa -->
+    <div id="modalEmpresa" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear empresa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="col-form-label">Nombre:</label>
+                            <input id="nombreE" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="col-form-label">Apellido:</label>
+                            <input id="apellidoE" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="identificacion" class="col-form-label">Dni/Cuit:</label>
+                            <input id="identificacionE" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="col-form-label">Direccion:</label>
+                            <input id="direccionE" type="text" class="form-control" autofocus required> 
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input id="emailE" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="razon" class="col-form-label">Razon social</label>
+                            <input id="razonE" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha" class="col-form-label">Fecha de Inicio:</label>
+                            <input id="fecha" type="date" class="form-control">
+                        </div>                      
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button id="guardar" type="submit" class="btn btn-primary">Guardar </button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Modal Persona -->
+    <div id="modalPersona" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear persona</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="col-form-label">Nombre:</label>
+                            <input id="nombreP" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="col-form-label">Apellido:</label>
+                            <input id="apellidoP" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="identificacion" class="col-form-label">Dni/Cuit:</label>
+                            <input id="identificacionP" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="col-form-label">Direccion:</label>
+                            <input id="direccionP" type="text" class="form-control" autofocus required> 
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input id="emailP" type="text" class="form-control" autofocus required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button id="guardarP" type="submit" class="btn btn-primary">Guardar </button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>   
+        
+        
+    
+    
+    <script src="pedidos.js"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+</body>
+</html>
