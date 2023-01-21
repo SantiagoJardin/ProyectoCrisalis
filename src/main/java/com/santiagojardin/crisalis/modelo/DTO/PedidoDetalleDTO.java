@@ -4,6 +4,8 @@ import com.santiagojardin.crisalis.modelo.Producto;
 import com.santiagojardin.crisalis.modelo.Servicio;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,15 +17,15 @@ public class PedidoDetalleDTO {
     @JsonProperty("producto")
     private Producto producto = null;
 
-    @JsonProperty("servicio")
-    private Servicio servicio = null;
+    //@JsonProperty("servicio")
+    //private Servicio servicio = null;
 
     @JsonProperty("precioVenta")
-    private double precioVenta;
+    private BigDecimal precioVenta;
 
     @JsonProperty("cantidad")
     private  int cantidad;
 
     @JsonProperty("precioUnidad")
-    private double precioUnidad;
+    private BigDecimal precioUnidad;
 }

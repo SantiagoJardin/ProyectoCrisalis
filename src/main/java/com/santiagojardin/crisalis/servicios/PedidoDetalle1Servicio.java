@@ -1,4 +1,4 @@
-package com.santiagojardin.crisalis.servicios;
+/*package com.santiagojardin.crisalis.servicios;
 
 import com.santiagojardin.crisalis.modelo.Producto;
 import com.santiagojardin.crisalis.modelo.PedidoDetalle;
@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 
 
  @Service
-public class PedidoDetalleServicio {
+public class PedidoDetalle1Servicio {
      private final ProductoRepositorio productoRepositorio;
      private final PedidoDetalleRepositorio pedidoDetalleRepositorio;
 
-     public PedidoDetalleServicio(ProductoRepositorio productoRepositorio  ,PedidoDetalleRepositorio pedidoDetalleRepositorio ) {
+     public PedidoDetalle1Servicio(ProductoRepositorio productoRepositorio  , PedidoDetalleRepositorio pedidoDetalleRepositorio ) {
          this.pedidoDetalleRepositorio = pedidoDetalleRepositorio;
          this.productoRepositorio = productoRepositorio;
      }
@@ -41,3 +41,4 @@ public class PedidoDetalleServicio {
                  .collect(Collectors.toList());
      }
 }
+*/
