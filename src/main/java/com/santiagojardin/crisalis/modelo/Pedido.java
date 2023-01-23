@@ -39,5 +39,5 @@ public class Pedido {
 
     @JoinColumn(name = "fecha")
     private LocalDate fecha;
-    
+
 }
