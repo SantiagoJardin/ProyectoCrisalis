@@ -26,16 +26,16 @@ public class PedidoDetalle {
     @ManyToOne (
             fetch = FetchType.EAGER
     )
-
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
-    /*@ManyToOne(
+    @ManyToOne(
             fetch = FetchType.EAGER
     )
     @JoinColumn(name = "servicio_id")
     private Servicio servicio;
-    */
+
+
     @JoinColumn(name = "precioVenta")
     private BigDecimal precioVenta;
 

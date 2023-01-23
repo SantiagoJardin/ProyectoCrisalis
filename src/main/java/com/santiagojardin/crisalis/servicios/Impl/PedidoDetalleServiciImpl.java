@@ -1,6 +1,6 @@
 package com.santiagojardin.crisalis.servicios.Impl;
 
-import com.santiagojardin.crisalis.modelo.DTO.PedidoDetalleDTO;
+
 import com.santiagojardin.crisalis.modelo.PedidoDetalle;
 import com.santiagojardin.crisalis.repositorios.PedidoDetalleRepositorio;
 import com.santiagojardin.crisalis.servicios.PedidoDetalleServicio;
@@ -41,7 +41,7 @@ public class PedidoDetalleServiciImpl implements PedidoDetalleServicio {
         pedidoDetalle1.setPrecioUnidad(pedidoDetalle.getPrecioUnidad());
         pedidoDetalle1.setPrecioVenta(pedidoDetalle.getPrecioVenta());
         pedidoDetalle1.setProducto(pedidoDetalle.getProducto());
-        //PedidoDetalle.setServicio(detalle_pedido.getServicio());
+        pedidoDetalle1.setServicio(pedidoDetalle.getServicio());
         return pedidoDetalleRepositorio.save(pedidoDetalle1);
     }
 
