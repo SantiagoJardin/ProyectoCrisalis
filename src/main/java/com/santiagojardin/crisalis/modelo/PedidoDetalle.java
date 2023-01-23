@@ -1,7 +1,5 @@
 package com.santiagojardin.crisalis.modelo;
 
-
-import com.santiagojardin.crisalis.modelo.DTO.PedidoDetalleDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,7 +32,6 @@ public class PedidoDetalle {
     )
     @JoinColumn(name = "servicio_id")
     private Servicio servicio;
-
 
     @JoinColumn(name = "precioVenta")
     private BigDecimal precioVenta;
