@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Getter
@@ -28,16 +29,16 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @ManyToOne (
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(name = "pedido_detalle_id")
-    private PedidoDetalle pedidoDetalle;
-
     @JoinColumn(name = "total")
     private BigDecimal total;
 
     @JoinColumn(name = "fecha")
     private LocalDate fecha;
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.MERGE
+    )
+    List<PedidoDetalle> pedidoDetalles;
 
 }

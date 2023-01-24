@@ -44,6 +44,7 @@ public class Cliente {
     private LocalDate fechaInicio;
 
     public Cliente(ClienteDTO clienteDTO){
+        this.id = clienteDTO.getId();
         this.esEmpresa = clienteDTO.isEsEmpresa();
         this.nombre = clienteDTO.getNombre();
         this.identificacion = clienteDTO.getIdentificacion();
@@ -55,6 +56,7 @@ public class Cliente {
     }
     public ClienteDTO toDTO() {
         return ClienteDTO.builder()
+                .id(this.id)
                 .esEmpresa(this.esEmpresa)
                 .nombre(this.nombre)
                 .identificacion(this.identificacion)

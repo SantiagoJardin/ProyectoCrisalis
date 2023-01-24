@@ -2,7 +2,8 @@ package com.santiagojardin.crisalis.controlador;
 
 
 import com.santiagojardin.crisalis.modelo.Pedido;
-import com.santiagojardin.crisalis.modelo.PedidoDetalle;
+import com.santiagojardin.crisalis.repositorios.PedidoRepositorio;
+import com.santiagojardin.crisalis.servicios.PedidoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class PedidoControlador {
 
     @PostMapping(value = "new")
     public ResponseEntity<Pedido> crearPedido (@RequestBody Pedido pedido) {
-        Pedido crerPedido = pedidoServicio.crearPedido(pedido);
+        Pedido crearPedido = pedidoServicio.crearPedido(pedido);
         return new ResponseEntity<>(crearPedido, HttpStatus.CREATED);
     }
 
@@ -39,7 +40,7 @@ public class PedidoControlador {
     public ResponseEntity<Pedido>actualizarPedido(@PathVariable("id") Long id,
                                                   @RequestBody Pedido pedido){
         pedido.setId(id);
-        Pedido actualizarPedido = pedidoServicio.actulizarPedido(pedido);
+        Pedido actualizarPedido = pedidoServicio.actualizarPedido(pedido);
         return new ResponseEntity<>(actualizarPedido, HttpStatus.OK);
     }
 
