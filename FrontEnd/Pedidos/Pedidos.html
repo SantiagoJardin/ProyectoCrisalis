@@ -39,12 +39,6 @@
         </div>  
     </div>
     
-    <!-- Tabla -->
-    <table class="producto-tabla" id="table">
-        <thead id="thead"></thead>
-        <tbody id="tbody"></tbody>
-    </table>
-    <th></th>
 
     <!-- Modal pedido -->
     <div id="modalArticulo" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,7 +49,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <button id="cliente-existente" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-dismiss="modal"  >Cliente existente</button>
+                    <button id="cliente-existente" type="button" class="btn btn-outline-primary" data-bs-toggle="modal"   >Cliente existente</button>
                     <button id="nuevo-cliente" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalArticulo2"  >Cliente nuevo</button>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -64,12 +58,16 @@
         </div>
     </div>
 
-    <div class="panel-personas">
-        <div class="container-personas" id="container-personas">
+    <div class="panel-grande" id="panel-grande">
+        <div class="panel-chico" id="panel-chico">
             <table class="producto-tabla" id="table">
                 <thead id="thead"></thead>
                 <tbody id="tbody"></tbody>
             </table>
+            <div class="botones-panel-chico" id="botones-panel-chico">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="guardar" type="submit" class="btn btn-primary">Seleccionar </button>
+            </div>
         </div>
     </div>
     

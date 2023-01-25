@@ -27,7 +27,8 @@ const table = document.querySelector("#table")
 const tableHead = document.querySelector("#thead")
 const tableBody = document.querySelector("#tbody")
 const clienteExistenteBtn = document.querySelector("#cliente-existente")
-const panelPersona = document.querySelector("panel-personas")
+const panelGrande = document.querySelector("#panel-grande")
+const panelChico = document.querySelector("#panel-chico")
 
 
 //Registro Empresa
@@ -100,6 +101,7 @@ async function fetchDataFromDB(lista) {
 
 function cargarBody(data) {
     for(let dataObject of data) {
+        
         const rowElement = document.createElement("tr");
         let dataObjectArray = Object.entries(dataObject);
         for(let i = 0; i < dataObjectArray.length; i++) {
@@ -140,9 +142,8 @@ async function refreshTable(urlHeaders, urlBody) {
         headerElement.textContent = headerText;
         tableHead.querySelector("tr").appendChild(headerElement); 
     }    
-
-    panelPersona.style.display = "none";
-    centerPanelPersona.style.display = "none";
+    
+    //panelContainer.style.display = "none";
     
 
     // Body
@@ -156,11 +157,8 @@ async function refreshTable(urlHeaders, urlBody) {
 
 clienteExistenteBtn.addEventListener("click", () => {
     refreshTable("./headers.json", 'http://localhost:8080/cliente/lista')
-    document.querySelector(".panel-personas").style.display = "block"
+    panelGrande.style.display = "flex";
+    panelChico.style.display = "flex";
     
 })
 
-empresaBtn.addEventListener("click", () => {
-    empresa = true
-})
-guardarBtnp.addEventListener("click", registroClientePersona)
