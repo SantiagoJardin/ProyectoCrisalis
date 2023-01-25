@@ -13,7 +13,7 @@ function login() {
             open("../Home/Home.html", "_self");
         }
         if(xhr.status == 500) {
-            alert("No se pudo iniciar sesión.")
+            alert("Usuario o contraseña incorrecta.")
         }
     }
 
@@ -21,7 +21,7 @@ function login() {
 }
 
 loginButton.addEventListener("click", () => {
-    if(usernameInput.value != "" || passwordInput.value != "") {
+    if(usernameInput.value != "" && passwordInput.value != "") {
         login()
     } else {
         alert("Hay datos faltantes.")

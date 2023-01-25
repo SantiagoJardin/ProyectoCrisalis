@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 public class ClienteDTO {
-    private int id;
     @JsonProperty("es_empresa")
     private boolean esEmpresa;
     @JsonProperty("nombre")
