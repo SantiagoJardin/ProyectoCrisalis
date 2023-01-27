@@ -60,6 +60,8 @@ var empresa = false
 const btnEditar = document.querySelector("#editar")
 const btnEliminar = document.querySelector("#eliminar")
 
+const botonCerrar = document.querySelector("#boton-cerrar")
+
 //registro de clientes
 function registroClienteEmpresa() { 
     if (nombreE.value != "" && apellidoE.value != "" && identificacionE.value != "" && emailE.value != "" && direccionE.value != "" && razonSocial.value != "") {
@@ -283,3 +285,6 @@ function search() {
     
 }
 
+botonCerrar.addEventListener("click" , () => {
+    open("../Login/Login.html", "_self");
+})

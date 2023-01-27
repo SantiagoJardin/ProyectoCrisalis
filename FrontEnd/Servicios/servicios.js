@@ -22,6 +22,8 @@ const cerrarEdicionServicio = document.querySelector("#cerrar-edicion-servicio")
 
 const nombreBuscado = document.querySelector("#nombre-busqueda")
 
+const botonCerrar = document.querySelector("#boton-cerrar")
+
 
 
 
@@ -155,3 +157,7 @@ guardarEdicionServicio.addEventListener("click", () => {
     refreshTable("./headers.json", listaBusqueda)
     
 }
+
+botonCerrar.addEventListener("click" , () => {
+    open("../Login/Login.html", "_self");
+})

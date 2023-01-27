@@ -128,3 +128,11 @@ body{
     background: #009fa5;
     
 }
+
+#boton-cerrar{
+    background-color: azure;
+}
+
+#boton-cerrar:hover{
+    background-color: #009fa5;
+}

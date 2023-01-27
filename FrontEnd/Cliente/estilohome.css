@@ -214,3 +214,11 @@ div.nuevo-usuario{
 tbody > tr:hover {
     color: rgb(117, 117, 117);
 }
+
+#boton-cerrar{
+    background-color: azure;
+}
+
+#boton-cerrar:hover{
+    background-color: #009fa5;
+}

@@ -22,6 +22,7 @@ const centerPanelProducto = document.querySelector("#centerpanel-producto");
 const guardarEdicionProducto = document.querySelector("#guardar-edicion-producto");
 const cerrarEdicionProducto = document.querySelector("#cerrar-edicion-producto");
 const nombreBuscado = document.querySelector("#nombre-busqueda")
+const botonCerrar = document.querySelector("#boton-cerrar")
 
 
 
@@ -158,3 +159,7 @@ guardarEdicionProducto.addEventListener("click", () => {
     refreshTable("./headers.json", listaBusqueda)
     
 }
+
+botonCerrar.addEventListener("click" , () => {
+    open("../Login/Login.html", "_self");
+})

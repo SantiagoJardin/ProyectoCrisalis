@@ -30,6 +30,9 @@ const clienteExistenteBtn = document.querySelector("#cliente-existente")
 const panelGrande = document.querySelector("#panel-grande")
 const panelChico = document.querySelector("#panel-chico")
 
+//Cerrar sesion
+const botonCerrar = document.querySelector("#boton-cerrar")
+
 
 //Registro Empresa
 function registroClienteEmpresa() { 
@@ -162,3 +165,6 @@ clienteExistenteBtn.addEventListener("click", () => {
     
 })
 
+botonCerrar.addEventListener("click" , () => {
+    open("../Login/Login.html", "_self");
+})

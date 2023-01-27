@@ -162,3 +162,10 @@ body{
     background-color: rgb(21, 83, 255);
 }
 
+#boton-cerrar{
+    background-color: azure;
+}
+
+#boton-cerrar:hover{
+    background-color: #009fa5;
+}

@@ -9,6 +9,7 @@ let resultados = ''
 const contenedor = document.querySelector("#data")
 const btnEditar = document.querySelector("#editar")
 const btnEliminar = document.querySelector("#eliminar")
+const botonCerrar = document.querySelector("#boton-cerrar")
 
 
 //add
@@ -159,3 +160,7 @@ guardarEdicionImpuesto.addEventListener("click", () => {
     refreshTable("./headers.json", listaBusqueda)
     
 }
+
+botonCerrar.addEventListener("click" , () => {
+    open("../Login/Login.html", "_self");
+})

@@ -232,4 +232,10 @@ tbody > tr:hover {
     background-color: azure;  
 }
 
+#boton-cerrar{
+    background-color: azure;
+}
 
+#boton-cerrar:hover{
+    background-color: #009fa5;
+}
