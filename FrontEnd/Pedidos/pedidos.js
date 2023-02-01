@@ -34,6 +34,9 @@ const panelChico = document.querySelector("#panel-chico")
 const botonCerrar = document.querySelector("#boton-cerrar")
 
 
+let filaSeleccionada = ""
+
+
 //Registro Empresa
 function registroClienteEmpresa() { 
     if (nombreE.value != "" && apellidoE.value != "" && identificacionE.value != "" && emailE.value != "" && direccionE.value != "" && razonSocial.value != "") {
@@ -117,6 +120,18 @@ function cargarBody(data) {
     }
 
     for (let i = 1, row; row = table.rows[i]; i++) {
+        row.addEventListener("click", () =>  {
+            if (filaSeleccionada == "") {
+                row.style.color = "#0D6EFD"
+                filaSeleccionada = row
+            } else {
+                filaSeleccionada.style.color = "#212529"
+                row.style.color = "#0D6EFD"
+                filaSeleccionada = row
+            }
+            
+
+        })
         for (let j = 0, col; col = row.cells[j]; j++) {
           if(col.innerHTML == "false") {
             col.innerHTML = "Persona";
