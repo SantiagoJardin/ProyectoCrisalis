@@ -14,15 +14,15 @@ import java.util.Optional;
 
 @Repository
 public interface ClienteRepositorio extends JpaRepository <Cliente, Integer>{
+    @Transactional
+    @Modifying
+    @Query("delete from Cliente c where c.identificacion = ?1")
+    void deleteByIdentificacion(String identificacion);
     @Query("select c from Cliente c where upper(c.nombre) like upper(concat('%', ?1, '%'))")
     List<Cliente> findByNombreContainsIgnoreCase(String nombre);
 
 
-    @Transactional
-    @Modifying
-    @Query("delete from Cliente c where c.identificacion = ?1")
-
-    void deleteByIdentificacion(String identificacion);
+    
     @Transactional
     @Modifying
 

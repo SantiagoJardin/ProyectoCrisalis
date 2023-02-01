@@ -30,11 +30,14 @@ const clienteExistenteBtn = document.querySelector("#cliente-existente")
 const panelGrande = document.querySelector("#panel-grande")
 const panelChico = document.querySelector("#panel-chico")
 
+
 //Cerrar sesion
 const botonCerrar = document.querySelector("#boton-cerrar")
 
 
 let filaSeleccionada = ""
+const btnSeleccionarCliente = document.querySelector("#guardar-seleccion")
+const btnCerrar = document.querySelector("#btn-cerrar")
 
 
 //Registro Empresa
@@ -96,6 +99,7 @@ function registroClientePersona() {
             alert("Persona registrada")
     } 
 }
+guardarBtnp.addEventListener("click", registroClientePersona)
 
 async function fetchDataFromDB(lista) {
     const response = await fetch(lista)
@@ -129,7 +133,6 @@ function cargarBody(data) {
                 row.style.color = "#0D6EFD"
                 filaSeleccionada = row
             }
-            
 
         })
         for (let j = 0, col; col = row.cells[j]; j++) {
@@ -144,6 +147,7 @@ function cargarBody(data) {
         
     }
 }
+
 
 async function refreshTable(urlHeaders, urlBody) {
     // Headers
@@ -182,4 +186,17 @@ clienteExistenteBtn.addEventListener("click", () => {
 
 botonCerrar.addEventListener("click" , () => {
     open("../Login/Login.html", "_self");
+})
+
+btnSeleccionarCliente.addEventListener("click" , () => {
+    if (filaSeleccionada == "") {
+        alert("Seleccione un cliente")
+        return
+    }
+
+})
+
+btnCerrar.addEventListener("click" , () => {
+    panelGrande.style.display = "none"
+    panelChico.style.display = "none"
 })
