@@ -49,7 +49,7 @@ const empresaBtn = document.querySelector("#modalEmpresa")
 //links
 const guardar = 'http://localhost:8080/cliente/guardar_cliente'
 const lista = 'http://localhost:8080/cliente/lista'
- 
+
 
 const nombreBuscado = document.querySelector("#nombre-busqueda")
 const buscarBtn = document.querySelector("#buscar-btn")
@@ -63,61 +63,56 @@ const btnEliminar = document.querySelector("#eliminar")
 const botonCerrar = document.querySelector("#boton-cerrar")
 
 //registro de clientes
-function registroClienteEmpresa() { 
+async function registroClienteEmpresa() {
     if (nombreE.value != "" && apellidoE.value != "" && identificacionE.value != "" && emailE.value != "" && direccionE.value != "" && razonSocial.value != "") {
         if (confirm("¿Confirmar registro?") == false) {
             return
         }
-            const data = {
-                es_empresa : true,
-                nombre : nombreE.value,
-                identificacion : identificacionE.value,
-                apellido : apellidoE.value,
-                direccion : direccionE.value,
-                email : emailE.value,
-                razonSocial : razonSocial.value,
-                fechaInicio : fechaInicio.value
-            };
-            console.log(fechaInicio.value)
-            const response = fetch(guardar, {
-                method : 'POST',
-                body : JSON.stringify(data),
-                headers : {
-                    'Content-Type': 'application/json'
-                }
-            })
+        const data = {
+            es_empresa: true,
+            nombre: nombreE.value,
+            identificacion: identificacionE.value,
+            apellido: apellidoE.value,
+            direccion: direccionE.value,
+            email: emailE.value,
+            razonSocial: razonSocial.value,
+            fechaInicio: fechaInicio.value
+        };
+        console.log(fechaInicio.value)
+        const response = await fetch(guardar, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(res => res.json())
             .then(data => console.log(data))
-            alert("Empresa registrada")
-    } 
-} 
+    }
+}
 
-function registroClientePersona() { 
+async function registroClientePersona() {
     if (nombreP.value != "" && apellidoP.value != "" && identificacionP.value != "" && emailP.value != "" && direccionP.value != "") {
-        if (confirm("¿Confirmar registro?") == false) {
-            return
-        }
-            const data = {
-                es_empresa : false,
-                nombre : nombreP.value,
-                identificacion : identificacionP.value,
-                apellido : apellidoP.value,
-                direccion : direccionP.value,
-                email : emailP.value,
-                razonSocial : null,
-                fechaInicio : null
-            };
-            const response = fetch(guardar, {
-                method : 'POST',
-                body : JSON.stringify(data),
-                headers : {
-                    'Content-Type': 'application/json'
-                }
-            })
+        const data = {
+            es_empresa: false,
+            nombre: nombreP.value,
+            identificacion: identificacionP.value,
+            apellido: apellidoP.value,
+            direccion: direccionP.value,
+            email: emailP.value,
+            razonSocial: null,
+            fechaInicio: null
+        };
+        const response = await fetch(guardar, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(res => res.json())
             .then(data => console.log(data))
-            alert("Persona registrada")
-    } 
+    }
 }
 
 
@@ -141,10 +136,10 @@ async function fetchDataFromDB(lista) {
 
 
 function cargarBody(data) {
-    for(let dataObject of data) {
+    for (let dataObject of data) {
         const rowElement = document.createElement("tr");
         let dataObjectArray = Object.entries(dataObject);
-        for(let i = 0; i < dataObjectArray.length; i++) {
+        for (let i = 0; i < dataObjectArray.length; i++) {
             const cellElement = document.createElement("td")
             cellElement.textContent = dataObjectArray[i][1];
             rowElement.appendChild(cellElement);
@@ -154,7 +149,7 @@ function cargarBody(data) {
 
         editar.addEventListener("click", () => {
             centerPanelContainer.style.display = "flex";
-            if(dataObjectArray[0][1] == false) {
+            if (dataObjectArray[0][1] == false) {
                 centerPanelPersona.style.display = "flex";
                 nombrePersona.value = dataObjectArray[1][1];
                 apellidoPersona.value = dataObjectArray[3][1];
@@ -174,16 +169,16 @@ function cargarBody(data) {
             }
         })
 
-        borrar.addEventListener("click", () => {
+        borrar.addEventListener("click", async () => {
             if (confirm("¿Desea eliminar?") == false) {
                 return
             }
             let dni = dataObjectArray[2][1];
             let linkBorrar = `http://localhost:8080/cliente/borrar?identificacion=${dni}`
-            let response = fetch(linkBorrar, {
+            let response = await fetch(linkBorrar, {
                 method: "POST"
-               })
-               console.log(response.status)
+            })
+            console.log(response.status)
             refreshTable("./headers.json", lista)
         })
 
@@ -200,15 +195,15 @@ function cargarBody(data) {
 
     for (let i = 1, row; row = table.rows[i]; i++) {
         for (let j = 0, col; col = row.cells[j]; j++) {
-          if(col.innerHTML == "false") {
-            col.innerHTML = "Persona";
-          } else if (col.innerHTML == "true") {
-            col.innerHTML = "Empresa";
-          } else if (col.innerHTML == "") {
-            col.innerHTML = "-";
-          }
+            if (col.innerHTML == "false") {
+                col.innerHTML = "Persona";
+            } else if (col.innerHTML == "true") {
+                col.innerHTML = "Empresa";
+            } else if (col.innerHTML == "") {
+                col.innerHTML = "-";
+            }
         }
-        
+
     }
 }
 
@@ -225,9 +220,9 @@ async function refreshTable(urlHeaders, urlBody) {
         const headerElement = document.createElement("th");
 
         headerElement.textContent = headerText;
-        tableHead.querySelector("tr").appendChild(headerElement); 
-    }    
-    
+        tableHead.querySelector("tr").appendChild(headerElement);
+    }
+
     centerPanelEmpresa.style.display = "none";
     centerPanelPersona.style.display = "none";
 
@@ -254,11 +249,11 @@ cerrarEdicionEmpresa.addEventListener("click", () => {
     centerPanelContainer.style.display = "none";
 })
 
-guardarEdicionPersona.addEventListener("click", () => {
-   let link = `http://localhost:8080/cliente/actualizar?esEmpresa=false&nombre=${nombrePersona.value}&identificacion=${identificacionPersona.value}&apellido=${apellidoPersona.value}&direccion=${direccionPersona.value}&email=${emailPersona.value}&razonSocial=&fechaInicio=`
-   fetch(link, {
-    method: "POST"
-   })
+guardarEdicionPersona.addEventListener("click", async () => {
+    let link = `http://localhost:8080/cliente/actualizar?esEmpresa=false&nombre=${nombrePersona.value}&identificacion=${identificacionPersona.value}&apellido=${apellidoPersona.value}&direccion=${direccionPersona.value}&email=${emailPersona.value}&razonSocial=&fechaInicio=`
+    await fetch(link, {
+        method: "POST"
+    })
     centerPanelContainer.style.display = "none";
     centerPanelEmpresa.style.display = "none";
     centerPanelPersona.style.display = "none";
@@ -266,25 +261,25 @@ guardarEdicionPersona.addEventListener("click", () => {
 
 })
 
-guardarEdicionEmpresa.addEventListener("click", () => {
+guardarEdicionEmpresa.addEventListener("click", async () => {
     let link = `http://localhost:8080/cliente/actualizar?esEmpresa=true&nombre=${nombreEmpresa.value}&identificacion=${identificacionEmpresa.value}&apellido=${apellidoEmpresa.value}&direccion=${direccionEmpresa.value}&email=${emailEmpresa.value}&razonSocial=${razonSocialEmpresa.value}&fechaInicio=${fechaInicioEmpresa.value}`
     console.log(identificacionEmpresa.value)
-    fetch(link, {
-    method: "POST"
-   })
+    await fetch(link, {
+        method: "POST"
+    })
     centerPanelContainer.style.display = "none";
     centerPanelEmpresa.style.display = "none";
     centerPanelPersona.style.display = "none";
     refreshTable("./headers.json", lista)
 })
 
-function search() { 
+function search() {
     event.preventDefault();
-    let listaBusqueda =`http://localhost:8080/cliente/obtener_por_nombre?nombre=${nombreBuscado.value}`
+    let listaBusqueda = `http://localhost:8080/cliente/obtener_por_nombre?nombre=${nombreBuscado.value}`
     refreshTable("./headers.json", listaBusqueda)
-    
+
 }
 
-botonCerrar.addEventListener("click" , () => {
+botonCerrar.addEventListener("click", () => {
     open("../Login/Login.html", "_self");
 })

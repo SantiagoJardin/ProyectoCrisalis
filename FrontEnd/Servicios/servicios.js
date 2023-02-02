@@ -28,22 +28,21 @@ const botonCerrar = document.querySelector("#boton-cerrar")
 
 
 //registro de Servicios
-function registroServicio() { 
+async function registroServicio() {
     const data = {
-        servicio : nombre.value,
-        precio : precio.value,
-        cargo : cargo.value,
+        servicio: nombre.value,
+        precio: precio.value,
+        cargo: cargo.value,
     };
-    const response = fetch(guardar, {
-        method : 'POST',
-        body : JSON.stringify(data),
-        headers : {
+    const response = await fetch(guardar, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
             'Content-Type': 'application/json'
         }
     })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    alert("Servicio registrado")
+        .then(res => res.json())
+        .then(data => console.log(data))
 }
 
 guardarBtn.addEventListener("click", registroServicio)
@@ -58,10 +57,10 @@ async function fetchDataFromDB(lista) {
 }
 
 function cargarBody(data) {
-    for(let dataObject of data) {
+    for (let dataObject of data) {
         const rowElement = document.createElement("tr");
         let dataObjectArray = Object.entries(dataObject);
-        for(let i = 0; i < (dataObjectArray.length) - 0; i++) {
+        for (let i = 0; i < (dataObjectArray.length) - 0; i++) {
 
             const cellElement = document.createElement("td")
 
@@ -78,7 +77,7 @@ function cargarBody(data) {
             nombreServicio.value = dataObjectArray[1][1];
             precioServicio.value = dataObjectArray[2][1];
             cargoSoporte.value = dataObjectArray[3][1];
-            
+
         })
 
         borrar.addEventListener("click", () => {
@@ -90,8 +89,8 @@ function cargarBody(data) {
             let linkBorrar = `http://localhost:8080/servicio/borrar?id=${servicio}`
             let response = fetch(linkBorrar, {
                 method: "POST"
-               })
-               console.log(response.status)
+            })
+            console.log(response.status)
             refreshTable("./headers.json", lista)
         })
 
@@ -121,7 +120,7 @@ async function refreshTable(urlHeaders, urlBody) {
         const headerElement = document.createElement("th");
 
         headerElement.textContent = headerText;
-        tableHead.querySelector("tr").appendChild(headerElement); 
+        tableHead.querySelector("tr").appendChild(headerElement);
     }
 
     centerPanelServicio.style.display = "none";
@@ -140,24 +139,22 @@ cerrarEdicionServicio.addEventListener("click", () => {
     centerPanelServicio.style.display = "none";
 })
 
-guardarEdicionServicio.addEventListener("click", () => {
+guardarEdicionServicio.addEventListener("click", async () => {
     let link = `http://localhost:8080/servicio/actualizar?servicio=${nombreServicio.value}&precio=${precioServicio.value}&cargo=${cargoSoporte.value}&id=${idServicio.value}`
-    fetch(link, {
-     method: "POST"
+    await fetch(link, {
+        method: "POST"
     })
-     centerPanelContainer.style.display = "none";
-     centerPanelServicio.style.display = "none";
-     refreshTable("./headers.json", lista)
- 
- })
+    centerPanelContainer.style.display = "none";
+    centerPanelServicio.style.display = "none";
+    refreshTable("./headers.json", lista)
+})
 
- function search() { 
+function search() {
     event.preventDefault();
-    let listaBusqueda =`http://localhost:8080/servicio/obtener_por_nombre?servicio=${nombreBuscado.value}`
+    let listaBusqueda = `http://localhost:8080/servicio/obtener_por_nombre?servicio=${nombreBuscado.value}`
     refreshTable("./headers.json", listaBusqueda)
-    
 }
 
-botonCerrar.addEventListener("click" , () => {
+botonCerrar.addEventListener("click", () => {
     open("../Login/Login.html", "_self");
 })

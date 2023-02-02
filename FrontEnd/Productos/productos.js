@@ -28,23 +28,22 @@ const botonCerrar = document.querySelector("#boton-cerrar")
 
 
 //registro de productos
-function registroProducto() { 
+async function registroProducto() {
     const data = {
-        producto : nombre.value,
-        precio : precio.value,
-        fecha : fecha.value,
-        stock : stock.value,
+        producto: nombre.value,
+        precio: precio.value,
+        fecha: fecha.value,
+        stock: stock.value,
     };
-    const response = fetch(guardar, {
-        method : 'POST',
-        body : JSON.stringify(data),
-        headers : {
+    const response = await fetch(guardar, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
             'Content-Type': 'application/json'
         }
     })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    alert("Producto registrado")
+        .then(res => res.json())
+        .then(data => console.log(data))
 }
 
 guardarBtn.addEventListener("click", registroProducto)
@@ -59,10 +58,10 @@ async function fetchDataFromDB(lista) {
 }
 
 function cargarBody(data) {
-    for(let dataObject of data) {
+    for (let dataObject of data) {
         const rowElement = document.createElement("tr");
         let dataObjectArray = Object.entries(dataObject);
-        for(let i = 0; i < (dataObjectArray.length) - 0; i++) {
+        for (let i = 0; i < (dataObjectArray.length) - 0; i++) {
 
             const cellElement = document.createElement("td")
 
@@ -92,8 +91,8 @@ function cargarBody(data) {
             let linkBorrar = `http://localhost:8080/producto/borrar?id=${producto}`
             let response = fetch(linkBorrar, {
                 method: "POST"
-               })
-               console.log(response.status)
+            })
+            console.log(response.status)
             refreshTable("./headers.json", lista)
         })
 
@@ -123,7 +122,7 @@ async function refreshTable(urlHeaders, urlBody) {
         const headerElement = document.createElement("th");
 
         headerElement.textContent = headerText;
-        tableHead.querySelector("tr").appendChild(headerElement); 
+        tableHead.querySelector("tr").appendChild(headerElement);
     }
 
     centerPanelProducto.style.display = "none";
@@ -142,24 +141,22 @@ cerrarEdicionProducto.addEventListener("click", () => {
     centerPanelProducto.style.display = "none";
 })
 
-guardarEdicionProducto.addEventListener("click", () => {
+guardarEdicionProducto.addEventListener("click", async () => {
     let link = `http://localhost:8080/producto/actualizar?producto=${nombreProducto.value}&precio=${precioProducto.value}&fecha=${fechaProducto.value}&stock=${cantidadProducto.value}&id=${idProdructo.value}`
-    fetch(link, {
-     method: "POST"
+    await fetch(link, {
+        method: "POST"
     })
-     centerPanelContainer.style.display = "none";
-     centerPanelProducto.style.display = "none";
-     refreshTable("./headers.json", lista)
- 
- })
+    centerPanelContainer.style.display = "none";
+    centerPanelProducto.style.display = "none";
+    refreshTable("./headers.json", lista)
+})
 
- function search() { 
+function search() {
     event.preventDefault();
-    let listaBusqueda =`http://localhost:8080/producto/obtener_por_nombre?producto=${nombreBuscado.value}`
+    let listaBusqueda = `http://localhost:8080/producto/obtener_por_nombre?producto=${nombreBuscado.value}`
     refreshTable("./headers.json", listaBusqueda)
-    
 }
 
-botonCerrar.addEventListener("click" , () => {
+botonCerrar.addEventListener("click", () => {
     open("../Login/Login.html", "_self");
 })
