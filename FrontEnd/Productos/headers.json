@@ -5,6 +5,7 @@
         "Precio",
         "Fecha",
         "Cantidad",
+        "Impuestos",
         "Acciones"
     ]
 }

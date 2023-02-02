@@ -21,8 +21,8 @@ public class ProductoControlador {
     }
 
     @PostMapping(value = "guardar_producto", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Producto guardarProducto(@RequestBody ProductoDTO productoDTO) {
-        return this.productoServicio.guardarProducto(productoDTO);
+    public Producto guardarProducto(@RequestBody ProductoDTO productoDTO, @RequestParam List<Integer> impuestosId) {
+        return this.productoServicio.guardarProducto(productoDTO, impuestosId);
     }
 
     @GetMapping(value = "obtener_por_nombre", produces = MediaType.APPLICATION_JSON_VALUE)

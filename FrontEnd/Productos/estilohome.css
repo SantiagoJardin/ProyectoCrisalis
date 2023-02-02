@@ -74,7 +74,14 @@ body{
     margin-top: 1%;
     border-radius: 5px;
     background-color: azure;
-    
+}
+
+td {
+    text-align: center;
+}
+
+thead {
+    text-align: center;
 }
 
 .producto-tabla tr {
@@ -105,6 +112,17 @@ body{
     to {opacity: 100%;}
 }
 
+@keyframes slide {
+    from {
+        transform: translate(-50%, -50%);
+        opacity: 0%;
+    }
+    to {
+        transform: translate(-50%, -40%);
+        opacity: 100%;
+    }
+}
+
 .centerpanel-producto {
     display: none;
     flex-direction: column;
@@ -116,8 +134,8 @@ body{
     background-color: azure;
     padding: 20px;
     border-radius: 10px;
-    animation-name: fade-in;
-    animation-duration: 0.4s;
+    animation-name: slide;
+    animation-duration: 0.5s;
 }
 
 .centerpanel-container {

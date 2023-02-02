@@ -169,3 +169,11 @@ body{
 #boton-cerrar:hover{
     background-color: #009fa5;
 }
+
+td {
+    text-align: center;
+}
+
+thead {
+    text-align: center;
+}

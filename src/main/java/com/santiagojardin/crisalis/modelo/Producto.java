@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -33,7 +34,10 @@ public class Producto {
     @Column(name = "stock")
     private int stock;
 
-
+    @ManyToMany(
+            fetch = FetchType.EAGER
+    )
+    private List<Impuesto> impuestos;
 
     public Producto(ProductoDTO productoDTO){
         this.id = productoDTO.getId();
@@ -41,6 +45,7 @@ public class Producto {
         this.precio = productoDTO.getPrecio();
         this.fecha = productoDTO.getFecha();
         this.stock = productoDTO.getStock();
+        this.impuestos = productoDTO.getImpuestos();
     }
 
     public ProductoDTO toDTO() {
@@ -50,6 +55,7 @@ public class Producto {
                 .precio(this.precio)
                 .fecha(this.fecha)
                 .stock(this.stock)
+                .impuestos(this.impuestos)
                 .build();
     }
 }

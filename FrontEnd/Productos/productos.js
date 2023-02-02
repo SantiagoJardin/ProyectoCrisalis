@@ -61,7 +61,19 @@ function cargarBody(data) {
     for (let dataObject of data) {
         const rowElement = document.createElement("tr");
         let dataObjectArray = Object.entries(dataObject);
-        for (let i = 0; i < (dataObjectArray.length) - 0; i++) {
+        for (let i = 0; i < dataObjectArray.length; i++) {
+
+            if(i == 5) {
+                let listaAMostrar = [];
+                let listaImpuestos = dataObjectArray[i][1];
+                for(let j of listaImpuestos) {
+                    listaAMostrar.push(j.impuesto)
+                }
+                const cellElement = document.createElement("td")
+                cellElement.textContent = listaAMostrar;
+                rowElement.appendChild(cellElement);
+                continue;
+            }
 
             const cellElement = document.createElement("td")
 
