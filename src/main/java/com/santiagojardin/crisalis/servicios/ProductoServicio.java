@@ -39,13 +39,25 @@ public class ProductoServicio {
 
     public List<Producto> loadProductoByName(String producto) {
         return this.productoRepositorio.findByProductoContainsIgnoreCase(producto);
-
     }
 
     public void actualizarProducto (String producto, double precio, LocalDate fecha,
-                                   int stock, int id) {
-        this.productoRepositorio.actualizarAtributos(producto, precio, fecha, stock, id);
-
+                                   int stock, int id, List<Integer> impuestosId) {
+        Producto producto1 = this.productoRepositorio.findById(id).orElseThrow(
+                () -> new RuntimeException("Producto no encontrado.")
+        );
+        List<Impuesto> impuestos = new ArrayList<>();
+        for (Integer i : impuestosId) {
+            impuestos.add(this.impuestoRepositorio.findById(i).orElseThrow(
+                    () -> new RuntimeException("Impuesto no encontrado")
+            ));
+        }
+        producto1.setProducto(producto);
+        producto1.setPrecio(precio);
+        producto1.setFecha(fecha);
+        producto1.setStock(stock);
+        producto1.setImpuestos(impuestos);
+        this.productoRepositorio.save(producto1);
     }
 
     public List<ProductoDTO> getProductosBD(){

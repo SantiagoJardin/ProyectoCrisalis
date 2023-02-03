@@ -1,6 +1,7 @@
 package com.santiagojardin.crisalis.repositorios;
 
 import com.santiagojardin.crisalis.modelo.DTO.ProductoDTO;
+import com.santiagojardin.crisalis.modelo.Impuesto;
 import com.santiagojardin.crisalis.modelo.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -25,11 +26,4 @@ public interface ProductoRepositorio extends JpaRepository <Producto, Integer>{
 
     void  deleteById(int id);
     Optional<Producto> findById(@NonNull int id);
-    @Transactional
-    @Modifying
-
-    @Query("update Producto p set p.producto = ?1, p.precio = ?2, p.fecha = ?3, p.stock = ?4 where p.id = ?5")
-    void actualizarAtributos(String producto, double precio, LocalDate fecha, int stock, int id);
-
-
 }

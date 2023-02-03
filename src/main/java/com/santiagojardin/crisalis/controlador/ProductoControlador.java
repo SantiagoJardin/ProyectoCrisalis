@@ -42,7 +42,7 @@ public class ProductoControlador {
 
     @PostMapping(value = "actualizar")
     public void actualizarProducto (@RequestParam String producto, double precio, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-                                   int stock, int id) {
-        this.productoServicio.actualizarProducto(producto, precio, fecha, stock, id);
+                                   int stock, int id, @RequestParam List<Integer> impuestosId) {
+        this.productoServicio.actualizarProducto(producto, precio, fecha, stock, id, impuestosId);
     }
 }

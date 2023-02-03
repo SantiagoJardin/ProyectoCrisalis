@@ -1,5 +1,9 @@
+const table = document.querySelector("#table")
 const tableBody = document.querySelector("#tbody")
 const tableHead = document.querySelector("#thead")
+const impuestoTable = document.querySelector("#impuesto-table")
+const impuestoTableBody = document.querySelector("#impuesto-tbody")
+const impuestoTableHead = document.querySelector("#impuesto-thead")
 const nombre = document.querySelector("#nombre")
 const precio = document.querySelector("#precio")
 const stock = document.querySelector("#stock")
@@ -8,6 +12,7 @@ const guardarBtn = document.querySelector("#guardar")
 const guardar = 'http://localhost:8080/producto/guardar_producto'
 const lista = 'http://localhost:8080/producto/lista'
 let resultados = ''
+let listaAEnviar = [];
 const contenedor = document.querySelector("#data")
 const btnEditar = document.querySelector("#editar")
 const btnEliminar = document.querySelector("#eliminar")
@@ -63,10 +68,10 @@ function cargarBody(data) {
         let dataObjectArray = Object.entries(dataObject);
         for (let i = 0; i < dataObjectArray.length; i++) {
 
-            if(i == 5) {
+            if (i == 5) {
                 let listaAMostrar = [];
                 let listaImpuestos = dataObjectArray[i][1];
-                for(let j of listaImpuestos) {
+                for (let j of listaImpuestos) {
                     listaAMostrar.push(j.impuesto)
                 }
                 const cellElement = document.createElement("td")
@@ -86,12 +91,33 @@ function cargarBody(data) {
         editar.addEventListener("click", () => {
             centerPanelContainer.style.display = "flex";
             centerPanelProducto.style.display = "flex";
-            console.log(dataObjectArray[0][1])
             idProdructo.value = dataObjectArray[0][1];
             nombreProducto.value = dataObjectArray[1][1];
             precioProducto.value = dataObjectArray[2][1];
             fechaProducto.value = dataObjectArray[3][1];
             cantidadProducto.value = dataObjectArray[4][1];
+            let impuestos = dataObjectArray[5][1]
+            let listaDeImpuestos = [];
+            for(let i of impuestos) {
+                listaDeImpuestos.push(i.impuesto)
+            }
+
+            for (let k = 1, filaImpuesto; filaImpuesto = impuestoTable.rows[k]; k++) {
+                document.querySelector(`#checkbox${filaImpuesto.cells[0].innerHTML}`).checked = false;
+                listaAEnviar = [];
+            }
+
+            for (let k = 1, filaImpuesto; filaImpuesto = impuestoTable.rows[k]; k++) {
+                if (listaDeImpuestos.includes(filaImpuesto.cells[1].innerHTML)) {
+                    document.querySelector(`#checkbox${filaImpuesto.cells[0].innerHTML}`).checked = true;
+                    listaAEnviar.push(parseInt(filaImpuesto.cells[0].innerHTML))
+                } else {
+                    const index = listaDeImpuestos.indexOf(filaImpuesto.cells[0].innerHTML);
+                    if (index > -1) {
+                        listaAEnviar.splice(index, 1);
+                    }
+                }
+            }   
         })
 
         borrar.addEventListener("click", () => {
@@ -117,8 +143,63 @@ function cargarBody(data) {
         td.append(borrar)
         rowElement.appendChild(td)
         tableBody.appendChild(rowElement);
-
     }
+}
+
+
+function cargarBodyImpuestos(data) {
+    for (let dataObject of data) {
+        const rowElement = document.createElement("tr");
+        let dataObjectArray = Object.entries(dataObject);
+        for (let i = 0; i < dataObjectArray.length; i++) {
+
+            const cellElement = document.createElement("td")
+
+            cellElement.textContent = dataObjectArray[i][1];
+            rowElement.appendChild(cellElement);
+        }
+        const checkbox = document.createElement("input")
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.setAttribute("id", `checkbox${dataObjectArray[0][1]}`)
+
+        rowElement.appendChild(checkbox);
+
+        checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+                listaAEnviar.push(dataObjectArray[0][1]);
+            } else {
+                const index = listaAEnviar.indexOf(dataObjectArray[0][1]);
+                listaAEnviar.splice(index, 1);
+            }
+        })
+
+        impuestoTableBody.appendChild(rowElement);
+    }
+}
+
+async function refreshTableImpuestos(urlHeaders, urlBody) {
+    // Headers
+    const headersResponse = await fetch(urlHeaders);
+    const { headers } = await headersResponse.json();
+
+    // Limpiar
+    impuestoTableHead.innerHTML = "<tr></tr>";
+
+    // Llenar
+    for (const headerText of headers) {
+        const headerElement = document.createElement("th");
+
+        headerElement.textContent = headerText;
+        impuestoTableHead.querySelector("tr").appendChild(headerElement);
+    }
+
+    centerPanelProducto.style.display = "flex";
+
+    // Body
+    impuestoTableBody.innerHTML = "";
+    fetchDataFromDB(urlBody).then(data => {
+        cargarBodyImpuestos(data);
+    });
 }
 
 async function refreshTable(urlHeaders, urlBody) {
@@ -147,6 +228,7 @@ async function refreshTable(urlHeaders, urlBody) {
 }
 
 refreshTable("./headers.json", lista)
+refreshTableImpuestos("./impuesto-headers.json", "http://localhost:8080/impuesto/lista")
 
 cerrarEdicionProducto.addEventListener("click", () => {
     centerPanelContainer.style.display = "none";
@@ -154,7 +236,7 @@ cerrarEdicionProducto.addEventListener("click", () => {
 })
 
 guardarEdicionProducto.addEventListener("click", async () => {
-    let link = `http://localhost:8080/producto/actualizar?producto=${nombreProducto.value}&precio=${precioProducto.value}&fecha=${fechaProducto.value}&stock=${cantidadProducto.value}&id=${idProdructo.value}`
+    let link = `http://localhost:8080/producto/actualizar?producto=${nombreProducto.value}&precio=${precioProducto.value}&fecha=${fechaProducto.value}&stock=${cantidadProducto.value}&id=${idProdructo.value}&impuestosId=${listaAEnviar.toString()}`
     await fetch(link, {
         method: "POST"
     })
