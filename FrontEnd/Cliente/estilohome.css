@@ -106,6 +106,17 @@ body{
     to {opacity: 100%;}
 }
 
+@keyframes slide {
+    from {
+        transform: translate(-50%, -50%);
+        opacity: 0%;
+    }
+    to {
+        transform: translate(-50%, -40%);
+        opacity: 100%;
+    }
+}
+
 .nuevo-usuario {
     text-align: left;
     max-width: 1300px;
@@ -115,8 +126,6 @@ body{
     background-color: white;
     display: flex;
     flex-direction: column;
-    
-    
 }
 
 .nuevo-usuario label{
@@ -151,7 +160,7 @@ div.nuevo-usuario{
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    animation-name: fade-in;
+    animation-name: slide;
     animation-duration: 0.4s;
 }
 
@@ -177,7 +186,7 @@ div.nuevo-usuario{
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    animation-name: fade-in;
+    animation-name: slide;
     animation-duration: 0.4s;
 }
 

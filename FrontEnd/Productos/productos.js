@@ -86,12 +86,12 @@ function cargarBody(data) {
         editar.addEventListener("click", () => {
             centerPanelContainer.style.display = "flex";
             centerPanelProducto.style.display = "flex";
+            console.log(dataObjectArray[0][1])
             idProdructo.value = dataObjectArray[0][1];
             nombreProducto.value = dataObjectArray[1][1];
             precioProducto.value = dataObjectArray[2][1];
             fechaProducto.value = dataObjectArray[3][1];
             cantidadProducto.value = dataObjectArray[4][1];
-
         })
 
         borrar.addEventListener("click", () => {
