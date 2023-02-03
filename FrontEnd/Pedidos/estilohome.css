@@ -14,7 +14,7 @@ td, th {
     padding: 0;
     width: 100%;
     max-width: 1300px;
-    background: azure;
+    background: white;
     margin: auto ;
     display: flex;
     border-radius: 5px;
@@ -68,7 +68,8 @@ td, th {
 }
 
 .menu li a:hover {
-    background: #009fa5;
+    background: #4c9fff;
+    color: white;
 }
 
 .producto-tabla {
@@ -79,7 +80,7 @@ td, th {
     padding: 4px;
     margin-top: 1%;
     border-radius: 5px;
-    background-color: azure;
+    background-color: white;
     
     
 }
@@ -89,7 +90,7 @@ td, th {
 }
 
 .producto-tabla tr th:hover {
-    color: #009fa5;
+    color: #4c9fff;
 }
 
 .img-btn {
@@ -118,7 +119,7 @@ td, th {
     margin: auto;
     padding: 1px;
     border-radius: 5px;
-    background-color: azure;
+    background-color: white;
     display: flex;
     flex-direction: column;
     
@@ -170,7 +171,7 @@ div.nuevo-usuario{
     margin: 5px;
     border: none;
     background-color: rgb(100, 140, 250);
-    color: azure;
+    color: white;
     border-radius: 5px;
     font-size: large;
 }
@@ -207,7 +208,7 @@ tbody > tr:hover {
     top: 28%;
     left: 50%;
     transform: translate(-50%, -28%);
-    background-color: azure;
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
     animation-name: fade-in;
@@ -229,13 +230,14 @@ tbody > tr:hover {
     padding: 4px;
     margin-top: 1%;
     border-radius: 5px;
-    background-color: azure;  
+    background-color: white;  
 }
 
 #boton-cerrar{
-    background-color: azure;
+    background-color: white;
 }
 
 #boton-cerrar:hover{
-    background-color: #009fa5;
+    background-color: #4c9fff;
+    color: white;
 }
