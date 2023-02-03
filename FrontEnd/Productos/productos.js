@@ -4,12 +4,14 @@ const tableHead = document.querySelector("#thead")
 const impuestoTable = document.querySelector("#impuesto-table")
 const impuestoTableBody = document.querySelector("#impuesto-tbody")
 const impuestoTableHead = document.querySelector("#impuesto-thead")
+const impuestoTableCrear = document.querySelector("#impuesto-table-crear")
+const impuestoTableBodyCrear = document.querySelector("#impuesto-tbody-crear")
+const impuestoTableHeadCrear = document.querySelector("#impuesto-thead-crear")
 const nombre = document.querySelector("#nombre")
 const precio = document.querySelector("#precio")
 const stock = document.querySelector("#stock")
 const fecha = document.querySelector("#fecha")
 const guardarBtn = document.querySelector("#guardar")
-const guardar = 'http://localhost:8080/producto/guardar_producto'
 const lista = 'http://localhost:8080/producto/lista'
 let resultados = ''
 let listaAEnviar = [];
@@ -34,12 +36,14 @@ const botonCerrar = document.querySelector("#boton-cerrar")
 
 //registro de productos
 async function registroProducto() {
+    const guardar = `http://localhost:8080/producto/guardar_producto?impuestosId=${listaAEnviar}`
     const data = {
         producto: nombre.value,
         precio: precio.value,
         fecha: fecha.value,
         stock: stock.value,
     };
+    console.log(guardar)
     const response = await fetch(guardar, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -98,7 +102,7 @@ function cargarBody(data) {
             cantidadProducto.value = dataObjectArray[4][1];
             let impuestos = dataObjectArray[5][1]
             let listaDeImpuestos = [];
-            for(let i of impuestos) {
+            for (let i of impuestos) {
                 listaDeImpuestos.push(i.impuesto)
             }
 
@@ -117,7 +121,7 @@ function cargarBody(data) {
                         listaAEnviar.splice(index, 1);
                     }
                 }
-            }   
+            }
         })
 
         borrar.addEventListener("click", () => {
@@ -143,11 +147,58 @@ function cargarBody(data) {
         td.append(borrar)
         rowElement.appendChild(td)
         tableBody.appendChild(rowElement);
+
+        table.rows[0].style.backgroundColor = "#123873";
+        table.rows[0].style.color = "white";
+        for (let i = 1, row; row = table.rows[i]; i++) {
+            if (i % 2 == 0) {
+                row.style.backgroundColor = "#EEEEEE";
+            }
+        }
     }
 }
 
 
 function cargarBodyImpuestos(data) {
+    for (let dataObject of data) {
+        const rowElement = document.createElement("tr");
+        let dataObjectArray = Object.entries(dataObject);
+        for (let i = 0; i < dataObjectArray.length; i++) {
+
+            const cellElement = document.createElement("td")
+
+            cellElement.textContent = dataObjectArray[i][1];
+            rowElement.appendChild(cellElement);
+        }
+        const checkbox = document.createElement("input")
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.setAttribute("id", `checkbox${dataObjectArray[0][1]}`)
+        checkbox.setAttribute("class", "checkbox");
+
+        rowElement.appendChild(checkbox);
+
+        checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+                listaAEnviar.push(dataObjectArray[0][1]);
+            } else {
+                const index = listaAEnviar.indexOf(dataObjectArray[0][1]);
+                listaAEnviar.splice(index, 1);
+            }
+        })
+
+        impuestoTableBody.appendChild(rowElement);
+    }
+
+    impuestoTable.rows[0].style.backgroundColor = "#123873";
+    impuestoTable.rows[0].style.color = "white";
+    for (let i = 1, row; row = impuestoTable.rows[i]; i++) {
+        if (i % 2 == 0) {
+            row.style.backgroundColor = "#EEEEEE";
+        }
+    }
+}
+
+function cargarBodyImpuestosCrear(data) {
     for (let dataObject of data) {
         const rowElement = document.createElement("tr");
         let dataObjectArray = Object.entries(dataObject);
@@ -167,13 +218,15 @@ function cargarBodyImpuestos(data) {
         checkbox.addEventListener("change", () => {
             if (checkbox.checked) {
                 listaAEnviar.push(dataObjectArray[0][1]);
+                console.log(listaAEnviar)
             } else {
                 const index = listaAEnviar.indexOf(dataObjectArray[0][1]);
                 listaAEnviar.splice(index, 1);
+                console.log(listaAEnviar)
             }
         })
 
-        impuestoTableBody.appendChild(rowElement);
+        impuestoTableBodyCrear.appendChild(rowElement);
     }
 }
 
@@ -199,6 +252,29 @@ async function refreshTableImpuestos(urlHeaders, urlBody) {
     impuestoTableBody.innerHTML = "";
     fetchDataFromDB(urlBody).then(data => {
         cargarBodyImpuestos(data);
+    });
+}
+
+async function refreshTableImpuestosCrear(urlHeaders, urlBody) {
+    // Headers
+    const headersResponse = await fetch(urlHeaders);
+    const { headers } = await headersResponse.json();
+
+    // Limpiar
+    impuestoTableHeadCrear.innerHTML = "<tr></tr>";
+
+    // Llenar
+    for (const headerText of headers) {
+        const headerElement = document.createElement("th");
+
+        headerElement.textContent = headerText;
+        impuestoTableHeadCrear.querySelector("tr").appendChild(headerElement);
+    }
+
+    // Body
+    impuestoTableBodyCrear.innerHTML = "";
+    fetchDataFromDB(urlBody).then(data => {
+        cargarBodyImpuestosCrear(data);
     });
 }
 
@@ -229,6 +305,8 @@ async function refreshTable(urlHeaders, urlBody) {
 
 refreshTable("./headers.json", lista)
 refreshTableImpuestos("./impuesto-headers.json", "http://localhost:8080/impuesto/lista")
+refreshTableImpuestosCrear("./impuesto-headers.json", "http://localhost:8080/impuesto/lista")
+
 
 cerrarEdicionProducto.addEventListener("click", () => {
     centerPanelContainer.style.display = "none";

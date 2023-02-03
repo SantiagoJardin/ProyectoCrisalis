@@ -60,6 +60,7 @@ td, th {
     color: #252525;
     padding: 20px;
     display: block;
+    font-weight: 500;
 }
 
 .menu li{
@@ -68,8 +69,9 @@ td, th {
 }
 
 .menu li a:hover {
-    background: #4c9fff;
+    background: #123873;
     color: white;
+    transition: .05s ease-in;
 }
 
 .producto-tabla {
@@ -87,10 +89,6 @@ td, th {
 
 .producto-tabla tr {
     margin-top: 0%;
-}
-
-.producto-tabla tr th:hover {
-    color: #4c9fff;
 }
 
 .img-btn {
@@ -113,6 +111,17 @@ td, th {
     to {opacity: 100%;}
 }
 
+@keyframes slide {
+    from {
+        transform: translate(-50%, -38%);
+        opacity: 0%;
+    }
+    to {
+        transform: translate(-50%, -28%);
+        opacity: 100%;
+    }
+}
+
 .nuevo-usuario {
     text-align: left;
     max-width: 1300px;
@@ -121,9 +130,7 @@ td, th {
     border-radius: 5px;
     background-color: white;
     display: flex;
-    flex-direction: column;
-    
-    
+    flex-direction: column; 
 }
 
 .nuevo-usuario label{
@@ -184,11 +191,6 @@ tbody > tr:hover {
     color: rgb(117, 117, 117);
 }
 
-@keyframes fade-in {
-    from {opacity: 0%;}
-    to {opacity: 100%;}
-}
-
 .panel-grande {
     width: 200vw;
     height: 200vh;
@@ -211,7 +213,7 @@ tbody > tr:hover {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    animation-name: fade-in;
+    animation-name: slide;
     animation-duration: 0.4s;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -235,9 +237,15 @@ tbody > tr:hover {
 
 #boton-cerrar{
     background-color: white;
+    font-weight: 500;
 }
 
 #boton-cerrar:hover{
-    background-color: #4c9fff;
+    background-color: #123873;
     color: white;
+    transition: .05s ease-in;
+}
+
+th {
+    font-weight: 500;
 }

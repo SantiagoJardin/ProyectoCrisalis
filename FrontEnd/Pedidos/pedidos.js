@@ -41,63 +41,63 @@ const btnCerrar = document.querySelector("#btn-cerrar")
 
 
 //Registro Empresa
-function registroClienteEmpresa() { 
+function registroClienteEmpresa() {
     if (nombreE.value != "" && apellidoE.value != "" && identificacionE.value != "" && emailE.value != "" && direccionE.value != "" && razonSocial.value != "") {
         if (confirm("¿Confirmar registro?") == false) {
             return
         }
-            const data = {
-                es_empresa : true,
-                nombre : nombreE.value,
-                identificacion : identificacionE.value,
-                apellido : apellidoE.value,
-                direccion : direccionE.value,
-                email : emailE.value,
-                razonSocial : razonSocial.value,
-                fechaInicio : fechaInicio.value
-            };
-            console.log(fechaInicio.value)
-            const response = fetch(guardar, {
-                method : 'POST',
-                body : JSON.stringify(data),
-                headers : {
-                    'Content-Type': 'application/json'
-                }
-            })
+        const data = {
+            es_empresa: true,
+            nombre: nombreE.value,
+            identificacion: identificacionE.value,
+            apellido: apellidoE.value,
+            direccion: direccionE.value,
+            email: emailE.value,
+            razonSocial: razonSocial.value,
+            fechaInicio: fechaInicio.value
+        };
+        console.log(fechaInicio.value)
+        const response = fetch(guardar, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(res => res.json())
             .then(data => console.log(data))
-            alert("Empresa registrada")
-    } 
+        alert("Empresa registrada")
+    }
 }
-guardarBtn.addEventListener("click", registroClienteEmpresa) 
+guardarBtn.addEventListener("click", registroClienteEmpresa)
 
 //Registro Persona
-function registroClientePersona() { 
+function registroClientePersona() {
     if (nombreP.value != "" && apellidoP.value != "" && identificacionP.value != "" && emailP.value != "" && direccionP.value != "") {
         if (confirm("¿Confirmar registro?") == false) {
             return
         }
-            const data = {
-                es_empresa : false,
-                nombre : nombreP.value,
-                identificacion : identificacionP.value,
-                apellido : apellidoP.value,
-                direccion : direccionP.value,
-                email : emailP.value,
-                razonSocial : null,
-                fechaInicio : null
-            };
-            const response = fetch(guardar, {
-                method : 'POST',
-                body : JSON.stringify(data),
-                headers : {
-                    'Content-Type': 'application/json'
-                }
-            })
+        const data = {
+            es_empresa: false,
+            nombre: nombreP.value,
+            identificacion: identificacionP.value,
+            apellido: apellidoP.value,
+            direccion: direccionP.value,
+            email: emailP.value,
+            razonSocial: null,
+            fechaInicio: null
+        };
+        const response = fetch(guardar, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(res => res.json())
             .then(data => console.log(data))
-            alert("Persona registrada")
-    } 
+        alert("Persona registrada")
+    }
 }
 guardarBtnp.addEventListener("click", registroClientePersona)
 
@@ -110,11 +110,11 @@ async function fetchDataFromDB(lista) {
 }
 
 function cargarBody(data) {
-    for(let dataObject of data) {
-        
+    for (let dataObject of data) {
+
         const rowElement = document.createElement("tr");
         let dataObjectArray = Object.entries(dataObject);
-        for(let i = 0; i < dataObjectArray.length; i++) {
+        for (let i = 0; i < dataObjectArray.length; i++) {
             const cellElement = document.createElement("td")
             cellElement.textContent = dataObjectArray[i][1];
             rowElement.appendChild(cellElement);
@@ -124,7 +124,12 @@ function cargarBody(data) {
     }
 
     for (let i = 1, row; row = table.rows[i]; i++) {
-        row.addEventListener("click", () =>  {
+        table.rows[0].style.backgroundColor = "#123873";
+        table.rows[0].style.color = "white";
+        if (i % 2 == 0) {
+            row.style.backgroundColor = "#EEEEEE";
+        }
+        row.addEventListener("click", () => {
             if (filaSeleccionada == "") {
                 row.style.color = "#0D6EFD"
                 filaSeleccionada = row
@@ -136,15 +141,15 @@ function cargarBody(data) {
 
         })
         for (let j = 0, col; col = row.cells[j]; j++) {
-          if(col.innerHTML == "false") {
-            col.innerHTML = "Persona";
-          } else if (col.innerHTML == "true") {
-            col.innerHTML = "Empresa";
-          } else if (col.innerHTML == "") {
-            col.innerHTML = "-";
-          }
+            if (col.innerHTML == "false") {
+                col.innerHTML = "Persona";
+            } else if (col.innerHTML == "true") {
+                col.innerHTML = "Empresa";
+            } else if (col.innerHTML == "") {
+                col.innerHTML = "-";
+            }
         }
-        
+
     }
 }
 
@@ -162,11 +167,11 @@ async function refreshTable(urlHeaders, urlBody) {
         const headerElement = document.createElement("th");
 
         headerElement.textContent = headerText;
-        tableHead.querySelector("tr").appendChild(headerElement); 
-    }    
-    
+        tableHead.querySelector("tr").appendChild(headerElement);
+    }
+
     //panelContainer.style.display = "none";
-    
+
 
     // Body
     tableBody.innerHTML = "";
@@ -181,14 +186,14 @@ clienteExistenteBtn.addEventListener("click", () => {
     refreshTable("./headers.json", 'http://localhost:8080/cliente/lista')
     panelGrande.style.display = "flex";
     panelChico.style.display = "flex";
-    
+
 })
 
-botonCerrar.addEventListener("click" , () => {
+botonCerrar.addEventListener("click", () => {
     open("../Login/Login.html", "_self");
 })
 
-btnSeleccionarCliente.addEventListener("click" , () => {
+btnSeleccionarCliente.addEventListener("click", () => {
     if (filaSeleccionada == "") {
         alert("Seleccione un cliente")
         return
@@ -196,7 +201,7 @@ btnSeleccionarCliente.addEventListener("click" , () => {
 
 })
 
-btnCerrar.addEventListener("click" , () => {
+btnCerrar.addEventListener("click", () => {
     panelGrande.style.display = "none"
     panelChico.style.display = "none"
 })

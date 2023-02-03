@@ -58,6 +58,7 @@ body{
 
 .menu li a:hover {
     background: #4c9fff;
+    transition: .05s ease-in;
 }
 
 .producto-tabla {

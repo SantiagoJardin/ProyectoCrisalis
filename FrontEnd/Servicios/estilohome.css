@@ -1,7 +1,6 @@
-body{
+body {
     font-family: sans-serif;
-    background: #e8e8e8;
-    background: linear-gradient(90deg, rgba(154,119,255,1) 0%, rgba(2,199,255,1) 100%);
+    background: linear-gradient(90deg, rgba(154, 119, 255, 1) 0%, rgba(2, 199, 255, 1) 100%);
 }
 
 .menu {
@@ -10,7 +9,7 @@ body{
     width: 100%;
     max-width: 1300px;
     background: white;
-    margin: auto ;
+    margin: auto;
     display: flex;
     border-radius: 5px;
 }
@@ -28,15 +27,14 @@ body{
     justify-content: space-between;
 }
 
-.barra-bs button{
+.barra-bs button {
     margin-left: 74%;
-    
+
 }
 
 .barra-bs .img-add {
     width: 50px;
     height: 50px;
-    
 }
 
 .barra-bs label input {
@@ -45,25 +43,27 @@ body{
     border: none;
     color: #252525;
     border-bottom: #252525;
-    
+
 }
 
 
-.menu li a{
+.menu li a {
     text-decoration: none;
     color: #252525;
     padding: 20px;
     display: block;
+    font-weight: 500;
 }
 
-.menu li{
+.menu li {
     display: inline-block;
     text-align: center;
 }
 
 .menu li a:hover {
-    background: #4c9fff;
+    background: #123873;
     color: white;
+    transition: .05s ease-in;
 }
 
 .producto-tabla {
@@ -75,15 +75,10 @@ body{
     margin-top: 1%;
     border-radius: 5px;
     background-color: white;
-    
 }
 
 .producto-tabla tr {
     margin-top: 0%;
-}
-
-.producto-tabla tr th:hover {
-    color: #4c9fff;
 }
 
 .img-btn {
@@ -102,8 +97,13 @@ body{
 }
 
 @keyframes fade-in {
-    from {opacity: 0%;}
-    to {opacity: 100%;}
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
 }
 
 @keyframes slide {
@@ -111,6 +111,7 @@ body{
         transform: translate(-50%, -50%);
         opacity: 0%;
     }
+
     to {
         transform: translate(-50%, -40%);
         opacity: 100%;
@@ -135,7 +136,7 @@ body{
 .centerpanel-container {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 40%;
     left: 50%;
@@ -149,9 +150,13 @@ body{
 
 }
 
-.input-atributo  {
+.input-atributo {
     margin: 10px;
 
+}
+
+.menu li a:hover {
+    justify-content: center;
 }
 
 .botones-popup {
@@ -164,27 +169,33 @@ body{
 .boton-popup {
     margin: 5px;
     border: none;
-    background-color: rgb(100, 140, 250);
+    background-color: #123873;
     color: white;
     border-radius: 5px;
     font-size: large;
 }
 
 .boton-popup:hover {
-    background-color: rgb(21, 83, 255);
+    background-color: #1a4e9c;
 }
 
-#boton-cerrar{
+#boton-cerrar {
     background-color: white;
+    font-weight: 500;
 }
 
-#boton-cerrar:hover{
-    background-color: #4c9fff;
+#boton-cerrar:hover {
+    background-color: #123873;
     color: white;
+    transition: .05s ease-in;
 }
 
 td {
     text-align: center;
+}
+
+th {
+    font-weight: 500;
 }
 
 thead {

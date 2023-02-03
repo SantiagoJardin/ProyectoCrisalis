@@ -8,7 +8,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-
     <!-- CSS -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <!-- Default theme -->
@@ -31,7 +30,7 @@
     <div class="centerpanel-container" id="centerpanel-container">
         <div class="centerpanel-producto" id="centerpanel-producto">
             <h3 class="titulo-popup">Editar producto</h3>
-            <h5>Nro producto: </h5s>
+            <h5>Nro: </h5s>
             <input id="id-producto" class="input-atributo" type="text" readonly>
             <h5>Producto: </h5>
             <input id="nombre-producto" class="input-atributo" placeholder="Producto" type="text" required>
@@ -94,6 +93,10 @@
                             <label for="stock" class="col-form-label">Cantidad de stock:</label>
                             <input id="stock" type="text" class="form-control" autofocus required> 
                         </div>
+                        <table class="producto-tabla" id="impuesto-table-crear">
+                            <thead id="impuesto-thead-crear"></thead>
+                            <tbody id="impuesto-tbody-crear"></tbody>
+                        </table>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <button id="guardar" type="submit" class="btn btn-primary">Guardar </button>

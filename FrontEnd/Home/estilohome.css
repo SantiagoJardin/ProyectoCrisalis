@@ -49,6 +49,7 @@ body{
     color: #252525;
     padding: 20px;
     display: block;
+    font-weight: 500;
 }
 
 .menu li{
@@ -57,8 +58,9 @@ body{
 }
 
 .menu li a:hover {
-    background: #4c9fff;
+    background: #123873;
     color: white;
+    transition: .05s ease-in;
 }
 
 .producto-tabla {
@@ -75,10 +77,6 @@ body{
 
 .producto-tabla tr {
     margin-top: 0%;
-}
-
-.producto-tabla tr th:hover {
-    color: #4c9fff;
 }
 
 .img-btn {
@@ -126,14 +124,16 @@ body{
     margin-left: 600px;
 }
 .menu-footer img:hover {
-    background: #4c9fff;
+    background: #DDDDDD;
 }
 
 #boton-cerrar{
     background-color: white;
+    font-weight: 500;
 }
 
 #boton-cerrar:hover{
-    background-color: #4c9fff;
+    background-color: #123873;
     color: white;
+    transition: .05s ease-in;
 }

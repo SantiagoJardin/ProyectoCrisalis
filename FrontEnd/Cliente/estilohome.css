@@ -4,6 +4,10 @@ body{
     background: linear-gradient(90deg, rgba(154,119,255,1) 0%, rgba(2,199,255,1) 100%);
 }
 
+th {
+    font-weight: 500;
+}
+
 .menu {
     list-style: none;
     padding: 0;
@@ -55,6 +59,7 @@ body{
     color: #252525;
     padding: 20px;
     display: block;
+    font-weight: 500;
 }
 
 .menu li{
@@ -63,8 +68,9 @@ body{
 }
 
 .menu li a:hover {
-    background: #4c9fff;
+    background: #123873;
     color: white;
+    transition: .05s ease-in;
 }
 
 .producto-tabla {
@@ -80,10 +86,6 @@ body{
 
 .producto-tabla tr {
     margin-top: 0%;
-}
-
-.producto-tabla tr th:hover {
-    color: #4c9fff;
 }
 
 .img-btn {
@@ -211,14 +213,14 @@ div.nuevo-usuario{
 .boton-popup {
     margin: 5px;
     border: none;
-    background-color: rgb(100, 140, 250);
+    background-color: #123873;
     color: white;
     border-radius: 5px;
     font-size: large;
 }
 
 .boton-popup:hover {
-    background-color: rgb(21, 83, 255);
+    background-color: #1a4e9c;
 }
 
 tbody > tr:hover {
@@ -227,9 +229,11 @@ tbody > tr:hover {
 
 #boton-cerrar{
     background-color: white;
+    font-weight: 500;
 }
 
 #boton-cerrar:hover{
-    background-color: #4c9fff;
+    background-color: #123873;
     color: white;
+    transition: .05s ease-in;
 }

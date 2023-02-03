@@ -1,6 +1,6 @@
 {
     "headers": [
-        "Id",
+        "Nro.",
         "Impuesto",
         "Porcentaje",
         "Acciones"
