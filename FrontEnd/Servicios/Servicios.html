@@ -39,6 +39,10 @@
             <input id="precio-servicio" class="input-atributo" placeholder="Precio" type="text" required>
             <h5>Cargo soporte: </h5>
             <input id="cargo-soporte" class="input-atributo" placeholder="Cargo" type="text" required>
+            <table class="producto-tabla" id="impuesto-table">
+                <thead id="impuesto-thead"></thead>
+                <tbody id="impuesto-tbody"></tbody>
+            </table>
             <div class="botones-popup">
                 <button class="boton-popup" id="guardar-edicion-servicio">Guardar</button>
                 <button class="boton-popup" id="cerrar-edicion-servicio">Cerrar</button>
@@ -83,6 +87,10 @@
                             <label for="soporte" class="col-form-label">Cargo de soporte:</label>
                             <input id="soporte" type="text" class="form-control" autofocus required> 
                         </div>
+                        <table class="producto-tabla" id="impuesto-table-crear">
+                            <thead id="impuesto-thead-crear"></thead>
+                            <tbody id="impuesto-tbody-crear"></tbody>
+                        </table>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <button id="guardar" type="submit" class="btn btn-primary">Guardar </button>

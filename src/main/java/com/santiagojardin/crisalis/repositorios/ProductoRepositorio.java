@@ -1,7 +1,6 @@
 package com.santiagojardin.crisalis.repositorios;
 
-import com.santiagojardin.crisalis.modelo.DTO.ProductoDTO;
-import com.santiagojardin.crisalis.modelo.Impuesto;
+
 import com.santiagojardin.crisalis.modelo.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -10,7 +9,6 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +16,6 @@ import java.util.Optional;
 public interface ProductoRepositorio extends JpaRepository <Producto, Integer>{
     @Query("select p from Producto p where upper(p.producto) like upper(concat('%', ?1, '%'))")
     List<Producto> findByProductoContainsIgnoreCase(String producto);
-
 
     @Transactional
     @Modifying

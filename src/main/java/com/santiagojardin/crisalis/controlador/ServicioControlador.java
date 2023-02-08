@@ -3,11 +3,10 @@ package com.santiagojardin.crisalis.controlador;
 import com.santiagojardin.crisalis.modelo.DTO.ServicioDTO;
 import com.santiagojardin.crisalis.modelo.Servicio;
 import com.santiagojardin.crisalis.servicios.ServicioServicio;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 @RestController
@@ -21,8 +20,8 @@ public class ServicioControlador {
     }
 
     @PostMapping(value = "guardar_servicio", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Servicio guardarServicio(@RequestBody ServicioDTO servicioDTO) {
-        return this.servicioServicio.guardarServicio(servicioDTO);
+    public Servicio guardarServicio(@RequestBody ServicioDTO servicioDTO, @RequestParam List<Integer> impuestosId) {
+        return this.servicioServicio.guardarServicio(servicioDTO, impuestosId);
     }
 
     @GetMapping(value = "obtener_por_nombre", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,7 +40,7 @@ public class ServicioControlador {
     }
 
     @PostMapping(value = "actualizar")
-    public void actualizarServicio (@RequestParam String servicio, double precio, double cargo, int id) {
-        this.servicioServicio.actualizarServicio(servicio, precio, cargo, id);
+    public void actualizarServicio (@RequestParam String servicio, double precio, double cargo, int id, @RequestParam List<Integer> impuestosId) {
+        this.servicioServicio.actualizarServicio(servicio, precio, cargo, id, impuestosId);
     }
 }

@@ -155,6 +155,10 @@ body {
 
 }
 
+.checkbox {
+    accent-color: #123873;
+}
+
 .menu li a:hover {
     justify-content: center;
 }

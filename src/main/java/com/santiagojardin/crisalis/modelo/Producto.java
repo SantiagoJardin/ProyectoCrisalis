@@ -1,7 +1,6 @@
 package com.santiagojardin.crisalis.modelo;
 
 import com.santiagojardin.crisalis.modelo.DTO.ProductoDTO;
-import com.santiagojardin.crisalis.modelo.DTO.ProductoDTO;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,10 +1,10 @@
 package com.santiagojardin.crisalis.modelo;
 
-import com.santiagojardin.crisalis.modelo.DTO.ImpuestoDTO;
 import com.santiagojardin.crisalis.modelo.DTO.ServicioDTO;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Getter
@@ -30,12 +30,18 @@ public class Servicio {
     @Column(name = "cargo")
     private double cargo;
 
+    @ManyToMany(
+            fetch = FetchType.LAZY
+    )
+    private List<Impuesto> impuestos;
+
 
     public Servicio(ServicioDTO servicioDTO){
         this.id = servicioDTO.getId();
         this.servicio = servicioDTO.getServicio();
         this.precio = servicioDTO.getPrecio();
         this.cargo = servicioDTO.getCargo();
+        this.impuestos = servicioDTO.getImpuestos();
     }
 
     public ServicioDTO toDTO() {
@@ -44,6 +50,7 @@ public class Servicio {
                 .servicio(this.servicio)
                 .precio(this.precio)
                 .cargo(this.cargo)
+                .impuestos(this.impuestos)
                 .build();
     }
 }

@@ -212,6 +212,7 @@ function cargarBodyImpuestosCrear(data) {
         const checkbox = document.createElement("input")
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("id", `checkbox${dataObjectArray[0][1]}`)
+        checkbox.setAttribute("class", "checkbox");
 
         rowElement.appendChild(checkbox);
 
@@ -227,6 +228,14 @@ function cargarBodyImpuestosCrear(data) {
         })
 
         impuestoTableBodyCrear.appendChild(rowElement);
+    }
+
+    impuestoTableCrear.rows[0].style.backgroundColor = "#123873";
+    impuestoTableCrear.rows[0].style.color = "white";
+    for (let i = 1, row; row = impuestoTableCrear.rows[i]; i++) {
+        if (i % 2 == 0) {
+            row.style.backgroundColor = "#EEEEEE";
+        }
     }
 }
 

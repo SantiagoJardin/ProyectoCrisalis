@@ -4,6 +4,7 @@
         "Nombre",
         "Precio",
         "Cargo",
+        "Impuestos",
         "Acciones"
     ]
 }

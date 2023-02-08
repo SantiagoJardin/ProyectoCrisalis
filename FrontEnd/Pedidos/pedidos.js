@@ -26,17 +26,19 @@ const empresaBtn = document.querySelector("#modalEmpresa")
 const table = document.querySelector("#table")
 const tableHead = document.querySelector("#thead")
 const tableBody = document.querySelector("#tbody")
+const detalleTable = document.querySelector("#detalle-table")
+const detalleTableHead = document.querySelector("#detalle-thead")
+const detalleTableBody = document.querySelector("#detalle-tbody")
+const detalleTabla = document.querySelector(".detalle-tabla")
 const clienteExistenteBtn = document.querySelector("#cliente-existente")
 const panelGrande = document.querySelector("#panel-grande")
 const panelChico = document.querySelector("#panel-chico")
+const detalleDiv = document.querySelector(".detalle-div");
 
 
 //Cerrar sesion
 const botonCerrar = document.querySelector("#boton-cerrar")
 
-
-let filaSeleccionada = ""
-const btnSeleccionarCliente = document.querySelector("#guardar-seleccion")
 const btnCerrar = document.querySelector("#btn-cerrar")
 
 
@@ -130,15 +132,14 @@ function cargarBody(data) {
             row.style.backgroundColor = "#EEEEEE";
         }
         row.addEventListener("click", () => {
-            if (filaSeleccionada == "") {
-                row.style.color = "#0D6EFD"
-                filaSeleccionada = row
-            } else {
-                filaSeleccionada.style.color = "#212529"
-                row.style.color = "#0D6EFD"
-                filaSeleccionada = row
-            }
-
+            table.style.animationName = "slide-left"
+            table.style.animationDuration = ".5s"
+            table.style.display = "none"
+            detalleDiv.style.animationName = "slide-right"
+            detalleDiv.style.animationDuration = ".5s"
+            detalleDiv.style.display = "inline"
+            refreshTableDetalle("./detalle-headers.json")
+            detalleTabla.style.display = "inline"
         })
         for (let j = 0, col; col = row.cells[j]; j++) {
             if (col.innerHTML == "false") {
@@ -170,38 +171,46 @@ async function refreshTable(urlHeaders, urlBody) {
         tableHead.querySelector("tr").appendChild(headerElement);
     }
 
-    //panelContainer.style.display = "none";
-
-
     // Body
     tableBody.innerHTML = "";
     fetchDataFromDB(urlBody).then(data => {
         console.log(data)
         cargarBody(data);
-
     });
+}
+
+async function refreshTableDetalle(urlHeaders) {
+    // Headers
+    const headersResponse = await fetch(urlHeaders);
+    const { headers } = await headersResponse.json();
+
+    // Limpiar
+    detalleTableHead.innerHTML = "<tr></tr>";
+    // Llenar
+    for (const headerText of headers) {
+        const headerElement = document.createElement("th");
+
+        headerElement.textContent = headerText;
+        detalleTableHead.querySelector("tr").appendChild(headerElement);
+    }
+
+    detalleTableBody.innerHTML = "";
 }
 
 clienteExistenteBtn.addEventListener("click", () => {
     refreshTable("./headers.json", 'http://localhost:8080/cliente/lista')
     panelGrande.style.display = "flex";
     panelChico.style.display = "flex";
-
 })
 
 botonCerrar.addEventListener("click", () => {
     open("../Login/Login.html", "_self");
 })
 
-btnSeleccionarCliente.addEventListener("click", () => {
-    if (filaSeleccionada == "") {
-        alert("Seleccione un cliente")
-        return
-    }
-
-})
-
 btnCerrar.addEventListener("click", () => {
     panelGrande.style.display = "none"
     panelChico.style.display = "none"
+    window.location.reload()
 })
+
+refreshTable("./headers.json", "http://localhost:8080/pedido/lista")
