@@ -161,6 +161,13 @@ td, th {
 
 .detalle-tabla {
     display: none;
+    align-self: center;
+    margin-block: 20px;
+}
+
+.detalle-thead {
+    background-color: #123873;
+    color: white;
 }
 
 .nuevo-usuario label{
@@ -181,7 +188,6 @@ div.nuevo-usuario{
 }
 
 .btn.btn-outline-primary {
-
     margin-bottom: 15px;
 }
 
@@ -221,7 +227,7 @@ tbody > tr:hover {
     color: rgb(117, 117, 117);
 }
 
-.panel-grande {
+.panel-grande, .panel-grande-lista {
     width: 200vw;
     height: 200vh;
     background-color: rgba(0, 0, 0, 0.5);
@@ -232,7 +238,21 @@ tbody > tr:hover {
     display: none;
 }
 
-.panel-chico {
+.cantidad-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block: 20px;
+}
+
+.total-div {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-block: 20px;
+}
+
+.panel-chico, .panel-chico-productos, .panel-chico-servicios {
     display: none;
     flex-direction: column;
     width: 850px;

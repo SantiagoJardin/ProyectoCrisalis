@@ -139,7 +139,7 @@ function cargarBody(data) {
     for (let dataObject of data) {
         const rowElement = document.createElement("tr");
         let dataObjectArray = Object.entries(dataObject);
-        for (let i = 0; i < dataObjectArray.length; i++) {
+        for (let i = 1; i < dataObjectArray.length; i++) {
             const cellElement = document.createElement("td")
             cellElement.textContent = dataObjectArray[i][1];
             rowElement.appendChild(cellElement);

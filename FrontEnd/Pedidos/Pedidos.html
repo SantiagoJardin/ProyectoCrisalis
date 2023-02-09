@@ -67,19 +67,37 @@
             </table>
             <div class="detalle-div">
                 <h3>Agregar Detalle</h3>
-                <button class="btn btn-primary">Producto</button>
-                <button class="btn btn-primary">Servicio</button>
+                <button id="btn-producto" class="btn btn-primary">Producto</button>
+                <button id="btn-servicio" class="btn btn-primary">Servicio</button>
             </div>
             <table class="detalle-tabla" id="detalle-table">
-                <thead id="detalle-thead"></thead>
-                <tbody id="detalle-tbody"></tbody>
+                <thead class="detalle-thead" id="detalle-thead"></thead>
+                <tbody class="detalle-tbody" id="detalle-tbody"></tbody>
             </table>
+            <h6 id="detalle-titulo" style="color: gray; display: none;">Aquí se agregarán detalles del pedido</h6>
+            <div class="total-div">
+                <h5 style="margin-inline: 10px;">Total:</h5>
+                <h5 id="total">0</h5>
+            </div>
             <div class="botones-panel-chico" id="botones-panel-chico">
+                <button id="btn-guardar-pedido" type="button" class="btn btn-primary" data-bs-dismiss="modal" style="display: none;">Guardar pedido</button>
                 <button id="btn-cerrar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
-    
+    <div class="panel-grande-lista">
+        <div class="panel-chico-productos">
+            <h3>Productos</h3>
+            <table class="productos-tabla" id="productos-table">
+                <thead class="productos-thead" id="productos-thead"></thead>
+                <tbody class="productos-tbody" id="productos-tbody"></tbody>
+            </table>
+            <div class="cantidad-div">
+                <h5 style="margin-inline: 10px;">Cantidad</h5>
+                <input type="number" name="cantidad" id="cantidad-input" style="margin-inline: 10px; width: 60px; transform: translateY(-4px);">
+            </div>
+        </div>
+    </div>
 
     <!-- Modal cliente -->
     <div id="modalArticulo2" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
