@@ -149,23 +149,23 @@ function cargarBody(data) {
 
         editar.addEventListener("click", () => {
             centerPanelContainer.style.display = "flex";
-            if (dataObjectArray[0][1] == false) {
+            if (dataObjectArray[1][1] == false) {
                 centerPanelPersona.style.display = "flex";
-                nombrePersona.value = dataObjectArray[1][1];
-                apellidoPersona.value = dataObjectArray[3][1];
-                identificacionPersona.value = dataObjectArray[2][1];
-                direccionPersona.value = dataObjectArray[4][1];
-                emailPersona.value = dataObjectArray[5][1];
+                nombrePersona.value = dataObjectArray[2][1];
+                apellidoPersona.value = dataObjectArray[4][1];
+                identificacionPersona.value = dataObjectArray[3][1];
+                direccionPersona.value = dataObjectArray[5][1];
+                emailPersona.value = dataObjectArray[6][1];
 
             } else {
                 centerPanelEmpresa.style.display = "flex";
-                identificacionEmpresa.value = dataObjectArray[2][1];
-                razonSocialEmpresa.value = dataObjectArray[6][1];
-                fechaInicioEmpresa.value = dataObjectArray[7][1];
-                nombreEmpresa.value = dataObjectArray[1][1];
-                apellidoEmpresa.value = dataObjectArray[3][1];
-                direccionEmpresa.value = dataObjectArray[4][1];
-                emailEmpresa.value = dataObjectArray[5][1];
+                identificacionEmpresa.value = dataObjectArray[3][1];
+                razonSocialEmpresa.value = dataObjectArray[7][1];
+                fechaInicioEmpresa.value = dataObjectArray[8][1];
+                nombreEmpresa.value = dataObjectArray[2][1];
+                apellidoEmpresa.value = dataObjectArray[4][1];
+                direccionEmpresa.value = dataObjectArray[5][1];
+                emailEmpresa.value = dataObjectArray[6][1];
             }
         })
 
