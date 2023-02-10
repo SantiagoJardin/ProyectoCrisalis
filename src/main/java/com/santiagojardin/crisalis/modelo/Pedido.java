@@ -24,7 +24,8 @@ public class Pedido {
     private Long id;
 
     @ManyToOne(
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE
     )
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

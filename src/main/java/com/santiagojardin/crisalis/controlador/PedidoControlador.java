@@ -2,6 +2,7 @@ package com.santiagojardin.crisalis.controlador;
 
 
 import com.santiagojardin.crisalis.modelo.Pedido;
+import com.santiagojardin.crisalis.modelo.PedidoDetalle;
 import com.santiagojardin.crisalis.repositorios.PedidoRepositorio;
 import com.santiagojardin.crisalis.servicios.PedidoServicio;
 import lombok.AllArgsConstructor;
@@ -48,5 +49,10 @@ public class PedidoControlador {
     public ResponseEntity<String> borrarPedido(@PathVariable("id") Long id) {
         pedidoServicio.borrarPedido(id);
         return new ResponseEntity<>("Pedido eliminado", HttpStatus.OK);
+    }
+
+    @GetMapping(value = "get_detalles")
+    public List<PedidoDetalle> obtenerDetalles(@RequestParam int id) {
+        return pedidoServicio.obtenerDetalles(id);
     }
 }

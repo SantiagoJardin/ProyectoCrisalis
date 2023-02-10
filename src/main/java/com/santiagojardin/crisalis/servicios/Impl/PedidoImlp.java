@@ -2,6 +2,8 @@ package com.santiagojardin.crisalis.servicios.Impl;
 
 
 import com.santiagojardin.crisalis.modelo.Pedido;
+import com.santiagojardin.crisalis.modelo.PedidoDetalle;
+import com.santiagojardin.crisalis.repositorios.ClienteRepositorio;
 import com.santiagojardin.crisalis.repositorios.PedidoRepositorio;
 import com.santiagojardin.crisalis.servicios.PedidoServicio;
 import lombok.AllArgsConstructor;
@@ -14,9 +16,13 @@ import java.util.List;
 public class PedidoImlp implements PedidoServicio {
 
     private PedidoRepositorio pedidoRepositorio;
+    private ClienteRepositorio clienteRepositorio;
 
     @Override
     public Pedido crearPedido(Pedido pedido) {
+        pedido.setCliente(this.clienteRepositorio.findById(pedido.getCliente().getId()).orElseThrow(
+                () -> new RuntimeException("Cliente no encontrado.")
+        ));
         return pedidoRepositorio.save(pedido);
     }
 
@@ -44,5 +50,13 @@ public class PedidoImlp implements PedidoServicio {
     @Override
     public void borrarPedido(Long id) {
         pedidoRepositorio.deleteById(id);
+    }
+
+    @Override
+    public List<PedidoDetalle> obtenerDetalles(int id) {
+        Pedido pedido = this.pedidoRepositorio.findById((long) id).orElseThrow(
+                () -> new RuntimeException("Pedido no encontrado")
+        );
+        return pedido.getPedidoDetalles();
     }
 }

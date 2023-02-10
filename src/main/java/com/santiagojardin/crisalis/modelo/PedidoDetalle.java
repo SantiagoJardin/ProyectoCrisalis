@@ -22,13 +22,15 @@ public class PedidoDetalle {
     private Long id;
 
     @ManyToOne (
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE
     )
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
     @ManyToOne(
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE
     )
     @JoinColumn(name = "servicio_id")
     private Servicio servicio;

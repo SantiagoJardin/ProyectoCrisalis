@@ -32,6 +32,12 @@ const detalleTableBody = document.querySelector("#detalle-tbody")
 const productoTable = document.querySelector("#productos-table")
 const productoTableHead = document.querySelector("#productos-thead")
 const productoTableBody = document.querySelector("#productos-tbody")
+const servicioTable = document.querySelector("#servicios-table")
+const servicioTableHead = document.querySelector("#servicios-thead")
+const servicioTableBody = document.querySelector("#servicios-tbody")
+const pedidosTable = document.querySelector("#pedidos-table")
+const pedidosTableHead = document.querySelector("#pedidos-thead")
+const pedidosTableBody = document.querySelector("#pedidos-tbody")
 const detalleTabla = document.querySelector(".detalle-tabla")
 const clienteExistenteBtn = document.querySelector("#cliente-existente")
 const panelGrande = document.querySelector("#panel-grande")
@@ -40,7 +46,13 @@ const detalleDiv = document.querySelector(".detalle-div");
 const cantidadInput = document.querySelector("#cantidad-input")
 const totalDiv = document.querySelector(".total-div");
 const total = document.querySelector("#total");
+const panelGrandeDetalle = document.querySelector(".panel-grande-detalle");
+const panelChicoDetalle = document.querySelector(".panel-chico-detalle")
+const pedidoDetalleTable = document.querySelector("#pedido-detalle-table")
+const pedidoDetalleTableHead = document.querySelector("#pedido-detalle-thead")
+const pedidoDetalleTableBody = document.querySelector("#pedido-detalle-tbody")
 let clienteId;
+let elementoSeleccionado;
 
 
 //Cerrar sesion
@@ -138,7 +150,7 @@ function cargarBody(data) {
         if (i % 2 == 0) {
             row.style.backgroundColor = "#EEEEEE";
         }
-        row.addEventListener("click", () => {
+        row.addEventListener("click", async () => {
             table.style.animationName = "slide-left"
             table.style.animationDuration = ".5s"
             table.style.display = "none"
@@ -156,8 +168,12 @@ function cargarBody(data) {
             totalDiv.style.animationName = "slide-right"
             totalDiv.style.animationDuration = ".5s"
             document.querySelector("#btn-guardar-pedido").style.display = "inline"
-            
-            clienteId = row.cells[2].innerHTML
+
+            await fetch(`http://localhost:8080/cliente/obtener_por_identificacion?identificacion=${row.cells[2].innerHTML}`)
+                .then(res => res.json())
+                .then(data => clienteId = data)
+
+            clienteId = clienteId.id
 
             for (let p = 1, row; row = detalleTabla.rows[p]; p++) {
                 if (p % 2 == 0) {
@@ -177,9 +193,13 @@ function cargarBody(data) {
     }
 }
 
-function cargarDetalles(id, nombre, precioUnitario, cantidad, subtotal) {
+function cargarDetalles(tipo, id, nombre, precioUnitario, cantidad, subtotal) {
     const fila = document.createElement("tr")
     let element;
+
+    element = document.createElement("td")
+    element.innerHTML = tipo
+    fila.appendChild(element)
 
     element = document.createElement("td")
     element.innerHTML = id
@@ -193,13 +213,24 @@ function cargarDetalles(id, nombre, precioUnitario, cantidad, subtotal) {
     element.innerHTML = precioUnitario
     fila.appendChild(element)
 
-    element = document.createElement("td")
-    element.innerHTML = cantidad
-    fila.appendChild(element)
+    if (tipo == "Producto") {
+        element = document.createElement("td")
+        element.innerHTML = cantidad
+        fila.appendChild(element)
+        element = document.createElement("td")
+        element.innerHTML = subtotal
+        fila.appendChild(element)
+    } else {
+        element = document.createElement("td")
+        element.innerHTML = 1
+        fila.appendChild(element)
+        element = document.createElement("td")
+        element.innerHTML = precioUnitario
+        fila.appendChild(element)
+    }
 
-    element = document.createElement("td")
-    element.innerHTML = subtotal
-    fila.appendChild(element)
+
+
 
     detalleTable.appendChild(fila)
 }
@@ -223,7 +254,7 @@ async function calcularImpuestos(precioUnitario, impuestos) {
 function sumarTotal() {
     let total = 0;
     for (let i = 1, row; row = detalleTable.rows[i]; i++) {
-        total = total + parseFloat(row.cells[4].innerHTML)
+        total = total + parseFloat(row.cells[5].innerHTML)
     }
     return total;
 }
@@ -269,10 +300,68 @@ function cargarBodyProductos(data) {
                 cantidadInput.value = 1;
             }
             precio = precio * cantidadInput.value
-            cargarDetalles(row.cells[0].innerHTML, row.cells[1].innerHTML, await calcularImpuestos(row.cells[2].innerHTML, row.cells[5].innerHTML), cantidadInput.value, precio)
+            cargarDetalles("Producto", row.cells[0].innerHTML, row.cells[1].innerHTML, await calcularImpuestos(row.cells[2].innerHTML, row.cells[5].innerHTML), cantidadInput.value, precio)
             let suma = sumarTotal()
             total.innerHTML = suma
-            
+
+        })
+        for (let j = 0, col; col = row.cells[j]; j++) {
+            if (col.innerHTML == "false") {
+                col.innerHTML = "Persona";
+            } else if (col.innerHTML == "true") {
+                col.innerHTML = "Empresa";
+            } else if (col.innerHTML == "") {
+                col.innerHTML = "-";
+            }
+        }
+    }
+}
+
+function cargarBodyServicios(data) {
+    for (let dataObject of data) {
+
+        const rowElement = document.createElement("tr");
+        let dataObjectArray = Object.entries(dataObject);
+        for (let i = 0; i < dataObjectArray.length; i++) {
+
+            if (i == 4) {
+                let listaAMostrar = [];
+                let listaImpuestos = dataObjectArray[i][1];
+                for (let j of listaImpuestos) {
+                    listaAMostrar.push(j.impuesto)
+                }
+                const cellElement = document.createElement("td")
+                cellElement.textContent = listaAMostrar;
+                rowElement.appendChild(cellElement);
+                continue;
+            }
+
+            const cellElement = document.createElement("td")
+            cellElement.textContent = dataObjectArray[i][1];
+            rowElement.appendChild(cellElement);
+        }
+
+        servicioTableBody.appendChild(rowElement);
+    }
+    for (let i = 1, row; row = servicioTable.rows[i]; i++) {
+        servicioTable.rows[0].style.backgroundColor = "#123873";
+        servicioTable.rows[0].style.color = "white";
+        if (i % 2 == 0) {
+            row.style.backgroundColor = "#EEEEEE";
+        }
+        row.addEventListener("click", async () => {
+            document.querySelector(".panel-grande-lista").style.display = "none"
+            document.querySelector(".panel-chico-servicios").style.display = "none"
+            document.querySelector("#detalle-titulo").style.display = "none";
+            let precio = await calcularImpuestos(row.cells[2].innerHTML, row.cells[4].innerHTML)
+            if (cantidadInput.value == "") {
+                cantidadInput.value = 1;
+            }
+            precio = (precio * cantidadInput.value) + parseFloat(row.cells[3].innerHTML)
+            cargarDetalles("Servicio", row.cells[0].innerHTML, row.cells[1].innerHTML, await calcularImpuestos(row.cells[2].innerHTML, row.cells[4].innerHTML) + parseFloat(row.cells[3].innerHTML), cantidadInput.value, precio)
+            let suma = sumarTotal()
+            total.innerHTML = suma
+
         })
         for (let j = 0, col; col = row.cells[j]; j++) {
             if (col.innerHTML == "false") {
@@ -334,6 +423,29 @@ async function refreshTableProductos(urlHeaders, urlBody) {
     });
 }
 
+async function refreshTableServicios(urlHeaders, urlBody) {
+    // Headers
+    const headersResponse = await fetch(urlHeaders);
+    const { headers } = await headersResponse.json();
+
+    // Limpiar
+    servicioTableHead.innerHTML = "<tr></tr>";
+
+    // Llenar
+    for (const headerText of headers) {
+        const headerElement = document.createElement("th");
+
+        headerElement.textContent = headerText;
+        servicioTableHead.querySelector("tr").appendChild(headerElement);
+    }
+
+    // Body
+    servicioTableBody.innerHTML = "";
+    fetchDataFromDB(urlBody).then(data => {
+        cargarBodyServicios(data);
+    });
+}
+
 async function refreshTableDetalle(urlHeaders) {
     // Headers
     const headersResponse = await fetch(urlHeaders);
@@ -352,6 +464,150 @@ async function refreshTableDetalle(urlHeaders) {
     detalleTableBody.innerHTML = "";
 }
 
+function cargarBodyPedidos(data) {
+    for (let dataObject of data) {
+        const rowElement = document.createElement("tr");
+        let dataObjectArray = Object.entries(dataObject);
+        for (let i = 0; i < dataObjectArray.length - 1; i++) {
+            if (i == 1) {
+                const cellElement = document.createElement("td")
+                cellElement.textContent = dataObjectArray[i][1].nombre + " " + dataObjectArray[i][1].apellido;
+                rowElement.appendChild(cellElement);
+                continue;
+            }
+            if (i == 2) {
+                const cellElement = document.createElement("td")
+                cellElement.textContent = dataObjectArray[3][1];
+                rowElement.appendChild(cellElement);
+                continue;
+            }
+            if (i == 3) {
+                const cellElement = document.createElement("td")
+                cellElement.textContent = dataObjectArray[2][1];
+                rowElement.appendChild(cellElement);
+                continue;
+            }
+            const cellElement = document.createElement("td")
+            cellElement.textContent = dataObjectArray[i][1];
+            rowElement.appendChild(cellElement);
+        }
+
+        pedidosTableBody.appendChild(rowElement);
+    }
+    pedidosTable.rows[0].style.backgroundColor = "#123873";
+    pedidosTable.rows[0].style.color = "white";
+    for (let i = 1, row; row = pedidosTable.rows[i]; i++) {
+        if (i % 2 == 0) {
+            row.style.backgroundColor = "#EEEEEE";
+        }
+        row.addEventListener("click", () => {
+            panelGrandeDetalle.style.display = "flex"
+            panelChicoDetalle.style.display = "flex"
+            elementoSeleccionado = row.cells[0].innerHTML
+            document.querySelector("#total-texto").innerHTML = row.cells[3].innerHTML;
+            refreshTableDetalles("./detalle-pedido-headers.json", `http://localhost:8080/pedido/get_detalles?id=${row.cells[0].innerHTML}`)
+        })
+    }
+}
+
+async function refreshTablePedidos(urlHeaders, urlBody) {
+    // Headers
+    const headersResponse = await fetch(urlHeaders);
+    const { headers } = await headersResponse.json();
+
+    // Limpiar
+    pedidosTableHead.innerHTML = "<tr></tr>";
+
+    // Llenar
+    for (const headerText of headers) {
+        const headerElement = document.createElement("th");
+
+        headerElement.textContent = headerText;
+        pedidosTableHead.querySelector("tr").appendChild(headerElement);
+    }
+
+    // Body
+    pedidosTableBody.innerHTML = "";
+    fetchDataFromDB(urlBody).then(data => {
+        cargarBodyPedidos(data);
+    });
+}
+
+function cargarBodyDetalles(data) {
+    for (let dataObject of data) {
+        const rowElement = document.createElement("tr");
+        let dataObjectArray = Object.entries(dataObject);
+        for (let i = 0; i < dataObjectArray.length; i++) {
+            if (i == 1 || i == 2) {
+                if (dataObjectArray[i][1] == null) {
+                    continue;
+                } else {
+                    const cellElement = document.createElement("td")
+                    if (i == 1) {
+                        cellElement.textContent = dataObjectArray[i][1].producto;
+                    } else {
+                        cellElement.textContent = dataObjectArray[i][1].servicio;
+                    }
+                    rowElement.appendChild(cellElement);
+                    continue;
+                }
+            }
+            if (i == 3) {
+                const cellElement = document.createElement("td")
+                cellElement.textContent = dataObjectArray[5][1];
+                rowElement.appendChild(cellElement);
+                continue;
+            }
+            if (i == 5) {
+                const cellElement = document.createElement("td")
+                cellElement.textContent = dataObjectArray[3][1];
+                rowElement.appendChild(cellElement);
+                continue;
+            }
+            const cellElement = document.createElement("td")
+            cellElement.textContent = dataObjectArray[i][1];
+            rowElement.appendChild(cellElement);
+        }
+
+        pedidoDetalleTableBody.appendChild(rowElement);
+    }
+    pedidoDetalleTable.rows[0].style.backgroundColor = "#123873";
+    pedidoDetalleTable.rows[0].style.color = "white";
+    for (let i = 1, row; row = pedidoDetalleTable.rows[i]; i++) {
+        if (i % 2 == 0) {
+            row.style.backgroundColor = "#EEEEEE";
+        }
+        row.addEventListener("click", () => {
+
+        })
+    }
+}
+
+async function refreshTableDetalles(urlHeaders, urlBody) {
+    // Headers
+    const headersResponse = await fetch(urlHeaders);
+    const { headers } = await headersResponse.json();
+
+    // Limpiar
+    pedidoDetalleTableHead.innerHTML = "<tr></tr>";
+
+    // Llenar
+    for (const headerText of headers) {
+        const headerElement = document.createElement("th");
+
+        headerElement.textContent = headerText;
+        pedidoDetalleTableHead.querySelector("tr").appendChild(headerElement);
+    }
+
+    // Body
+    pedidoDetalleTableBody.innerHTML = "";
+    fetchDataFromDB(urlBody).then(data => {
+        console.log(data)
+        cargarBodyDetalles(data);
+    });
+}
+
+
 clienteExistenteBtn.addEventListener("click", () => {
     refreshTable("./headers.json", 'http://localhost:8080/cliente/lista')
     panelGrande.style.display = "flex";
@@ -369,32 +625,99 @@ btnCerrar.addEventListener("click", () => {
 })
 
 refreshTable("./headers.json", "http://localhost:8080/pedido/lista")
+refreshTablePedidos("./pedido_headers.json", "http://localhost:8080/pedido/lista")
+
 
 document.querySelector("#btn-producto").addEventListener("click", () => {
     document.querySelector(".panel-grande-lista").style.display = "flex"
     document.querySelector(".panel-chico-productos").style.display = "flex"
     refreshTableProductos("./producto_headers.json", "http://localhost:8080/producto/lista")
+    cantidadInput.value = 1
+})
+
+document.querySelector("#btn-servicio").addEventListener("click", () => {
+    document.querySelector(".panel-grande-lista").style.display = "flex"
+    document.querySelector(".panel-chico-servicios").style.display = "flex"
+    refreshTableServicios("./servicio_headers.json", "http://localhost:8080/servicio/lista")
+    cantidadInput.value = 1
 })
 
 document.querySelector("#btn-guardar-pedido").addEventListener("click", async () => {
     let responseData;
-    let today = new Date().toISOString().slice(0, 10)
-    await fetch(`http://localhost:8080/cliente/obtener_por_identificacion?identificacion=${clienteId}`)
-        .then(res => res.json())
-        .then(data => responseData = data);
-    
-    
+    let data;
+    let listaDetalles = [];
 
-    const data = {
-        cliente: {
+    for (let i = 1, row; row = detalleTable.rows[i]; i++) {
+
+        if (row.cells[0].innerHTML == "Producto") {
+            data = {
+                producto: {
+                    id: row.cells[1].innerHTML
+                },
+                servicio: null,
+                precioVenta: row.cells[5].innerHTML,
+                cantidad: row.cells[4].innerHTML,
+                precioUnidad: row.cells[3].innerHTML
+            }
+        } else {
+            data = {
+                producto: null,
+                servicio: {
+                    id: row.cells[1].innerHTML
+                },
+                precioVenta: row.cells[5].innerHTML,
+                cantidad: 1,
+                precioUnidad: row.cells[3].innerHTML
+            }
+        }
+
+        await fetch("http://localhost:8080/pedido_detalle/new", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .then(data => responseData = data)
+
+        let detalle = {
             id: responseData.id
-        },
-        total: total,
-        fecha: today,
-
+        }
+        listaDetalles.push(detalle)
     }
+
+    data = {
+        cliente: {
+            id: clienteId
+        },
+        total: parseFloat(total.innerHTML),
+        fecha: new Date().toJSON(),
+        pedidoDetalles: listaDetalles
+    }
+
+    await fetch("http://localhost:8080/pedido/new", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(res => res.json())
+        .then(data => console.log(data))
+
+    refreshTablePedidos("./pedido_headers.json", "http://localhost:8080/pedido/lista")
+
 })
 
-document.querySelector("#btn-servicio").addEventListener("click", () => {
+document.querySelector("#eliminar-pedido-btn").addEventListener("click", async () => {
+    await fetch(`http://localhost:8080/pedido/borrarPedido/${elementoSeleccionado}`, {
+        method: "DELETE"
+    })
+    window.location.reload()
+})
 
+document.querySelector("#cerrar-detalle-btn").addEventListener("click", () => {
+    panelGrandeDetalle.style.display = "none"
+    panelChicoDetalle.style.display = "none"
 })

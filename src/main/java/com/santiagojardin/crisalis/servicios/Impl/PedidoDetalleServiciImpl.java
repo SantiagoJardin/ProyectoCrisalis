@@ -29,7 +29,6 @@ public class PedidoDetalleServiciImpl implements PedidoDetalleServicio {
 
     @Override
     public List<PedidoDetalle> obtenerLista() {
-
         return pedidoDetalleRepositorio.findAll();
     }
 

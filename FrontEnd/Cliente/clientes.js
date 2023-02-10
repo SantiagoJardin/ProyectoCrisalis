@@ -173,7 +173,7 @@ function cargarBody(data) {
             if (confirm("¿Desea eliminar?") == false) {
                 return
             }
-            let dni = dataObjectArray[2][1];
+            let dni = dataObjectArray[3][1];
             let linkBorrar = `http://localhost:8080/cliente/borrar?identificacion=${dni}`
             let response = await fetch(linkBorrar, {
                 method: "POST"
